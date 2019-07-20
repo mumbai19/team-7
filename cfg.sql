@@ -3,9 +3,10 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 20, 2019 at 10:37 PM
--- Server version: 10.1.16-MariaDB
--- PHP Version: 7.0.9
+
+-- Generation Time: Jul 20, 2019 at 08:39 PM
+-- Server version: 10.1.35-MariaDB
+-- PHP Version: 7.2.9
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -128,8 +129,13 @@ CREATE TABLE `attendance` (
   `attendance_id` int(11) NOT NULL,
   `student_id` int(11) NOT NULL,
   `isPresent` int(11) NOT NULL,
+<<<<<<< HEAD
   `programme_id` int(11) NOT NULL,
   `mentor_id` int(11) NOT NULL,
+=======
+  `month` int(11) NOT NULL,
+  `year` int(11) NOT NULL,
+>>>>>>> 659db74b3ed6090777ec6836301464d632831b80
   `created_on` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `created_by` int(11) NOT NULL,
   `updated_on` datetime NOT NULL,
@@ -491,6 +497,7 @@ CREATE TABLE `users` (
 -- Dumping data for table `users`
 --
 
+<<<<<<< HEAD
 INSERT INTO `users` (`user_id`, `user_first_name`, `user_last_name`, `user_gender`, `user_phone`, `user_email`, `user_password`, `user_role_id`, `is_first_login`, `created_on`, `created_by`, `updated_on`, `updated_by`, `is_deleted`, `deleted_on`, `deleted_by`) VALUES
 (1, 'Aakash ', 'Narang', 'Male', '9820197746', 'aakashnarang@gmail.com', 'aakashpass', 1, 0, '2019-07-20 20:02:52', 1, '2019-07-20 20:02:52', 0, 0, '0000-00-00 00:00:00', 0),
 (2, 'Aashish ', 'Narang', 'Male', '9820197746', 'aashishnarang@gmail.com', 'aashishpass', 2, 0, '2019-07-20 20:03:58', 1, '2019-07-20 20:03:58', 0, 0, '0000-00-00 00:00:00', 0),
@@ -502,6 +509,16 @@ INSERT INTO `users` (`user_id`, `user_first_name`, `user_last_name`, `user_gende
 (8, NULL, NULL, NULL, NULL, '123@gmail.com', NULL, 2, 0, '2019-07-21 01:09:58', NULL, '2019-07-21 01:09:58', NULL, NULL, NULL, NULL),
 (17, 'Dhiren', 'Chotwani', 'Male', '9898856040', 'dhirenchotwani@gmail.com', 'abc', 2, 0, '2019-07-21 02:00:13', 1, '2019-07-21 02:00:13', NULL, 0, NULL, NULL),
 (18, 'Ashok', 'Chotwani', 'Male', '9898856040', 'chotwanidhirendc@gmail.com', 'ABC', 2, 0, '2019-07-21 02:02:33', 1, '2019-07-21 02:02:33', NULL, 0, NULL, NULL);
+=======
+INSERT INTO `users` (`user_id`, `user_first_name`, `user_last_name`, `user_gender`, `user_phone`, `user_email`, `user_password`, `user_role_id`, `created_on`, `created_by`, `updated_on`, `updated_by`, `is_deleted`, `deleted_on`, `deleted_by`) VALUES
+(1, 'Aakash ', 'Narang', 'Male', '9820197746', 'aakashnarang@gmail.com', 'aakashpass', 1, '2019-07-20 20:02:52', 1, '2019-07-20 20:02:52', 0, 0, '0000-00-00 00:00:00', 0),
+(2, 'Aashish ', 'Narang', 'Male', '9820197746', 'aashishnarang@gmail.com', 'aashishpass', 2, '2019-07-20 20:03:58', 1, '2019-07-20 20:03:58', 0, 0, '0000-00-00 00:00:00', 0),
+(3, 'Alok', 'Shah', 'Male', '9820187767', 'alokshah@gmail.com', 'alokshah', 3, '2019-07-20 20:07:05', 1, '2019-07-20 20:07:05', 0, 0, '0000-00-00 00:00:00', 0),
+(4, 'Anmol', 'Shah', 'Male', '9834187767', 'anmolshah@gmail.com', 'anmolshah', 3, '2019-07-20 20:08:03', 1, '2019-07-20 20:08:03', 0, 0, '0000-00-00 00:00:00', 0),
+(5, 'Shobha', 'Hande', 'Female', '9833181607', 'shobhahande@gmail.com', 'shobhahande', 2, '2019-07-20 20:09:42', 1, '2019-07-20 20:09:42', 0, 0, '0000-00-00 00:00:00', 0),
+(6, 'Aditi', 'Hande', 'Female', '9823181607', 'aditihande@gmail.com', 'shobhahande', 2, '2019-07-20 20:10:25', 1, '2019-07-20 20:10:25', 0, 0, '0000-00-00 00:00:00', 0),
+(7, 'Aneri', 'Gupta', 'Female', '9823181609', 'nerigupta@gmail.com', 'nerigupta', 2, '2019-07-20 20:10:25', 1, '2019-07-20 20:10:25', 0, 0, '0000-00-00 00:00:00', 0);
+>>>>>>> 659db74b3ed6090777ec6836301464d632831b80
 
 -- --------------------------------------------------------
 
@@ -658,6 +675,10 @@ ALTER TABLE `user_role_type`
 --
 ALTER TABLE `activity`
   MODIFY `activity_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+<<<<<<< HEAD
+=======
+
+>>>>>>> 659db74b3ed6090777ec6836301464d632831b80
 --
 -- AUTO_INCREMENT for table `activity_programme`
 --
@@ -677,7 +698,12 @@ ALTER TABLE `assessment_parameter_criteria`
 -- AUTO_INCREMENT for table `attendance`
 --
 ALTER TABLE `attendance`
+<<<<<<< HEAD
   MODIFY `attendance_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+=======
+  MODIFY `attendance_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=363;
+
+>>>>>>> 659db74b3ed6090777ec6836301464d632831b80
 --
 -- AUTO_INCREMENT for table `mentor`
 --
@@ -698,6 +724,10 @@ ALTER TABLE `parameters`
 --
 ALTER TABLE `programme`
   MODIFY `programme_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+<<<<<<< HEAD
+=======
+
+>>>>>>> 659db74b3ed6090777ec6836301464d632831b80
 --
 -- AUTO_INCREMENT for table `savings`
 --
@@ -728,6 +758,10 @@ ALTER TABLE `starchart_parameter_criteria`
 --
 ALTER TABLE `student`
   MODIFY `student_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+<<<<<<< HEAD
+=======
+
+>>>>>>> 659db74b3ed6090777ec6836301464d632831b80
 --
 -- AUTO_INCREMENT for table `student_programme`
 --
@@ -738,11 +772,20 @@ ALTER TABLE `student_programme`
 --
 ALTER TABLE `theme`
   MODIFY `theme_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+<<<<<<< HEAD
+=======
+
+>>>>>>> 659db74b3ed6090777ec6836301464d632831b80
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
+<<<<<<< HEAD
   MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+=======
+  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+
+>>>>>>> 659db74b3ed6090777ec6836301464d632831b80
 --
 -- AUTO_INCREMENT for table `user_role_type`
 --

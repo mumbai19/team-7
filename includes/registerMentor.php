@@ -5,6 +5,7 @@ include_once "../classes/Session.class.php";
 Session::startSession();
 $db=(new Database())->getConnection();
 $crud=new Crud($db);
+<<<<<<< HEAD
 $email=$crud->getUserEmailByID($_SESSION['user_id']);
 if(isset($_POST['regMentor'])){
 
@@ -33,6 +34,23 @@ if(isset($_POST['regMentor'])){
     header("Location: dashboard.php");
 
 
+=======
+if(isset($_POST['regMentor'])){
+    
+    $condition="user_email='usr@gmail.com' ";
+    extract($_POST);
+    $data=array(
+      'user_first_name' => $mentorFname,
+      'user_last_name' => $mentorLname,
+      'user_gender' => $mentorGender,
+      'user_phone' => $mentorPhone,
+      'created_by' =>1,
+      'is_deleted' => 0,        
+      'user_role_id' => 2,
+    );
+
+    $crud->update($db,'users',$data,$condition);
+>>>>>>> 659db74b3ed6090777ec6836301464d632831b80
 }
 ?>
 
@@ -139,6 +157,7 @@ if(isset($_POST['regMentor'])){
 
         <!-- BODY GOES HERE -->
         <section class="content">
+<<<<<<< HEAD
             <div class="row">
                 <!-- left column -->
                 <div class="col-md-6">
@@ -185,6 +204,52 @@ if(isset($_POST['regMentor'])){
 
 
                 </div>
+=======
+      <div class="row">
+        <!-- left column -->
+        <div class="col-md-6">
+          <!-- general form elements -->
+          <div class="box box-primary">
+            <div class="box-header with-border">
+              <h3 class="box-title">Quick Example</h3>
+            </div>
+            <!-- /.box-header -->
+            <!-- form start -->
+            <form role="form" action="" method="post" enctype="multipart/form-data">
+              <div class="box-body">
+                <div class="form-group">
+                    <label>First Name</label>
+
+                    <input type="text" class="form-control" name="mentorFname">
+                </div>
+                <div class="form-group">
+                    <label>Last Name</label>
+
+                    <input type="text" class="form-control" name="mentorLname">
+                </div>
+                <div class="form-group">
+                    <label>Phone Number</label>
+
+                    <input type="phone" class="form-control" name="mentorPhone">
+                </div>
+                <div class="form-group">
+                  <label>Gender</label>
+                  <select class="form-control" name="mentorGender">
+                    <option>Male</option>
+                    <option>Female</option>
+                    <option>Others</option>
+                  </select>
+                </div>
+              </div>
+              <!-- /.box-body -->
+
+              <div class="box-footer">
+                <input type="submit" class="btn btn-primary" name="regMentor" value="Register as Mentor"> 
+              </div>
+            </form>
+          </div>
+
+>>>>>>> 659db74b3ed6090777ec6836301464d632831b80
 
             </div>
             <!-- /.row -->
@@ -193,6 +258,7 @@ if(isset($_POST['regMentor'])){
 
 
     </div>
+<<<<<<< HEAD
     <!-- /.content-wrapper -->
 
 
@@ -241,3 +307,45 @@ if(isset($_POST['regMentor'])){
 <script src="../assets/dist/js/demo.js"></script>
 </body>
 </html>
+=======
+    <!-- ./wrapper -->
+
+    <!-- jQuery 3 -->
+    <script src="../assets/bower_components/jquery/dist/jquery.min.js"></script>
+    <!-- jQuery UI 1.11.4 -->
+    <script src="../assets/bower_components/jquery-ui/jquery-ui.min.js"></script>
+    <!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
+
+    <!-- Bootstrap 3.3.7 -->
+    <script src="../assets/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+    <!-- Morris.js charts -->
+    <script src="../assets/bower_components/raphael/raphael.min.js"></script>
+    <script src="../assets/bower_components/morris.js/morris.min.js"></script>
+    <!-- Sparkline -->
+    <script src="../assets/bower_components/jquery-sparkline/dist/jquery.sparkline.min.js"></script>
+    <!-- jvectormap -->
+    <script src="../assets/plugins/jvectormap/jquery-jvectormap-1.2.2.min.js"></script>
+    <script src="../assets/plugins/jvectormap/jquery-jvectormap-world-mill-en.js"></script>
+    <!-- jQuery Knob Chart -->
+    <script src="../assets/bower_components/jquery-knob/dist/jquery.knob.min.js"></script>
+    <!-- daterangepicker -->
+    <script src="../assets/bower_components/moment/min/moment.min.js"></script>
+    <script src="../assets/bower_components/bootstrap-daterangepicker/daterangepicker.js"></script>
+    <!-- datepicker -->
+    <script src="../assets/bower_components/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js"></script>
+    <!-- Bootstrap WYSIHTML5 -->
+    <script src="../assets/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.min.js"></script>
+    <!-- Slimscroll -->
+    <script src="../assets/bower_components/jquery-slimscroll/jquery.slimscroll.min.js"></script>
+    <!-- FastClick -->
+    <script src="../assets/bower_components/fastclick/lib/fastclick.js"></script>
+    <!-- AdminLTE App -->
+    <script src="../assets/dist/js/adminlte.min.js"></script>
+    <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
+    <script src="../assets/dist/js/pages/dashboard.js"></script>
+    <!-- AdminLTE for demo purposes -->
+    <script src="../assets/dist/js/demo.js"></script>
+  </body>
+</html>
+
+>>>>>>> 659db74b3ed6090777ec6836301464d632831b80

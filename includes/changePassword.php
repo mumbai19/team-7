@@ -5,6 +5,7 @@ include_once "../classes/Session.class.php";
 Session::startSession();
 $db=(new Database())->getConnection();
 $crud=new Crud($db);
+<<<<<<< HEAD
 if(isset($_POST['changePass']) && isset($_GET['XSRS'])){
     $mail=$_GET['XSRS'];
     extract($_POST);
@@ -17,6 +18,19 @@ if(isset($_POST['changePass']) && isset($_GET['XSRS'])){
         header("Location: login.php");
     }
 }
+=======
+$condition="user_email='usr@gmail.com' ";
+if(isset($_POST['changePass'])){
+    extract($_POST);
+    if(strcmp($pass1,$pass2)==0){
+      $data=array(
+        'user_password' => $pass1,
+      );
+      
+      $crud->update($db,'users',$data,$condition);
+    }
+}    
+>>>>>>> 659db74b3ed6090777ec6836301464d632831b80
 ?>
 
 <!DOCTYPE html>
@@ -150,8 +164,40 @@ if(isset($_POST['changePass']) && isset($_GET['XSRS'])){
                         </form>
                     </div>
 
+<<<<<<< HEAD
                 </div>
             </div>
+=======
+        <div class="box box-primary">
+            <div class="box-header with-border">
+              <h3 class="box-title">Quick Example</h3>
+            </div>
+            <!-- /.box-header -->
+            <!-- form start -->
+            <form role="form" action="" method="post" enctype="multipart/form-data">
+              <div class="box-body">
+               
+                <div class="form-group">
+                  <label for="exampleInputPassword1">New Password</label>
+                  <input type="password" class="form-control" name="pass1" >
+                </div>
+                <div class="form-group">
+                  <label for="exampleInputPassword1">Confirm New Password</label>
+                  <input type="password" class="form-control" name="pass2">
+                </div>
+              
+              </div>
+              <!-- /.box-body -->
+
+              <div class="box-footer">
+                <input type="submit" class="btn btn-primary" name="changePass" value="Add Mentor"> 
+              </div>
+            </form>
+          </div>
+    
+        </div>
+        </div>
+>>>>>>> 659db74b3ed6090777ec6836301464d632831b80
         </section>
 
     </div>
