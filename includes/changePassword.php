@@ -79,9 +79,7 @@
 
       <!-- Left side column. contains the logo and sidebar -->
       <!-- side bar goes ehre -->
-      <?php
-      include_once ("../includes/templates/navbar.php");
-      ?>
+
       <!-- side bar ends -->
 
       <!-- Content Wrapper. Contains page content -->
