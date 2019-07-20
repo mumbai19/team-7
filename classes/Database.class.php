@@ -3,8 +3,8 @@
 class Database{
     private $host="localhost";
     private  $db="cfg";
-    private  $username="";
-    private $password="";
+    private  $username="Dhiren Chotwani";
+    private $password="Activa9015";
     private $conn=null;
 
     public function __construct()

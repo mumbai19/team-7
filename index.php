@@ -1,3 +1,7 @@
+<?php
+include_once "./classes/Database.class.php";
+?>
+
 <!DOCTYPE html>
 <html>
   <head>
