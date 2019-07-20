@@ -109,6 +109,7 @@ $mentor=new Mentor($db);
         <!-- BODY GOES HERE -->
         <body>
         <?php
+        echo $_SESSION['user_id'];
         $data=$mentor->getAllProgramsForTeacher($_SESSION['user_id']);
         extract($data[0]);
 

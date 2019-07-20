@@ -24,11 +24,9 @@ if(isset($_POST['login'])) {
         Session::setSession($values);
         Session::setCookies($signed_in_val);
 
-        if($data[0]['is_first_login']){
-            header("Location: changePassword.php");
-        }else {
+
             header("Location: dashboard.php");
-        }
+
 
     }
 }
