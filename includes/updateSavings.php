@@ -36,10 +36,10 @@ $crud=new Crud($db);
       }
       table{
         padding: 10px;
-         border:1px solid black;
-          width=50% ;
-          margin : 20px;
-          margin-left: 30%;
+        border:1px solid black;
+        margin : 20px 20%;
+        width:30% ;
+
       }
     </style>
 </head>
@@ -65,14 +65,15 @@ Choose Programme:
 <?php
 
 if(isset($_POST['searchStudents'])){
-  echo '<form role="form" action="" method="post" enctype="multipart/form-data">';
+ 
   extract($_POST);
-  echo "<table> <tr> <th> First Name </th>  <th> SavingsToday </th> </tr>";
+  echo "<table> <tr> <th> First Name </th>  <th> Savings Today </th> </tr>";
   $condition=" student_id in (select student_id from student_programme where student_programme.programme_id=(select programme_id from programme where programme_name='$programme')) ";
   $result= $crud->readall($db,'student',$condition);
+   echo '<form  action="updateSavings.php" method="post" ';
   foreach($result as $res){
       echo '<tr> <td>'.$res['student_first_name'].' '.$res['student_last_name'].'</td> <td>';
-      echo "<input type='number' name='student_id[".$res['student_id']."]' value=".$res['student_id']." hidden> <input type=number name='saving'> </td> </tr>";
+      echo "<input type='number' name='".$res['student_id']."'> </td> </tr>";
       //echo "<input type=number name='stud_id[".$res['student_id']."]'> </td> </tr>";
      
     }
@@ -82,12 +83,28 @@ if(isset($_POST['searchStudents'])){
 }
 
 
-
-
-
 if(isset($_POST['insertSavings'])){
-  echo $StudArr=$_POST['student_id'];
-  //$value=$StudArr['student'];
+      $result= $crud->readall($db,'student',$condition);
+
+      foreach($result as $res){
+      //echo $result['student_id'];
+        $id = $res['student_id'];
+        $saving =  $_POST[$id];
+        $data=array(
+        'student_id' => $id,
+        'user_id' => 1,
+        'amount' => $saving,
+        
+        'created_by' =>1,
+        'is_deleted' => 0,
+        
+
+    );
+    $crud->create($db,'savings',$data);
+
+      
+        
+    }
 }
 ?>
 
