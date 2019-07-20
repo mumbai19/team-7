@@ -20,6 +20,14 @@ class Mentor
 
     }
 
+    public function getMentor($user_id){
+        $sql = "select mentor_id from mentor where mentor.user_id=$user_id";
+        $ps = $this->conn->prepare($sql);
+        $ps->execute();
+        $result = $ps->fetch();
+        return $result;
+    }
+
     public function getProgramForMentor($conn,$mentor_id){
         $sql = "SELECT prog_id FROM mentor where mentor_id=$mentor_id";
         $ps = $this->conn->prepare($sql);

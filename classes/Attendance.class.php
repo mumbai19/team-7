@@ -1,13 +1,18 @@
 <?php
 
-include_once "Session.class.php";
+include_once("Mentor.class.php");
+
 
 class Attendance{
 
     private $table = "attendance";
 
-    public function getAllStudents($conn){
-        $program = 2;
+    public function getAllStudents($conn,$user_id){
+        
+        $obj = new Mentor($conn);
+
+        $program = $obj->getProgramForMentor($conn,$user_id);
+
         $sql = "select student.student_id,student.student_first_name,student_last_name,mentor.mentor_id from student_programme inner join student on student_programme.student_id=student.student_id inner join mentor_programme on student_programme.programme_id=mentor_programme.programme_id inner join mentor on mentor_programme.mentor_id=mentor.mentor_id and student_programme.programme_id=2";
         // student_programme.student_programme_id,student.student_first_name,mentor.user_id
         $ps = $conn->prepare($sql);
