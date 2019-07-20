@@ -1,6 +1,6 @@
 <?php
-include_once "Crud.class.php";
-include_once "Database.class.php";
+include_once "../classes/Crud.class.php";
+include_once "../classes/Database.class.php";
 $conn=(new Database())->getConnection();
 class Session{
 
