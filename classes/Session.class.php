@@ -30,8 +30,8 @@ class Session{
     public function unsetSession(){
         $_SESSION['user_id'] = "";
         $_SESSION['user_name']="";
-        $_SESSION['user_occupation']="";
-        return session_destroy();
+        $_SESSION['user_role_type']="";
+
     }
 
     public function setCookies($signed_in){

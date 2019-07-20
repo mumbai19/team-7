@@ -1,6 +1,7 @@
 <?php
 
-class Crud
+
+class AdminCrud
 {
     private $conn;
     public function __construct($conn)
@@ -9,23 +10,23 @@ class Crud
     }
 
     public  function create($conn,$table,$data){
-         
+
         $columnString = implode(",",array_keys($data));
         $valueString = ":".implode(", :",array_keys($data));
 
         $sql = "INSERT INTO {$table} ({$columnString}) VALUES ({$valueString})";
 
         $ps = $conn->prepare($sql);
-        
+
         $result = $ps->execute($data);
-        
+
         if($result){
             return $conn->lastInsertId();
         }else{
             return false;
         }
     }
-    
+
     public static function update($conn,$table,$data,$condition){
         $i=0;
         $columnValueSet = "";
@@ -35,7 +36,6 @@ class Crud
             $i++;
         }
         $sql = "UPDATE $table SET $columnValueSet WHERE $condition";
-        echo $sql;
         $ps =  $conn->prepare($sql);
 
         $result = $ps->execute();
@@ -45,7 +45,7 @@ class Crud
             return false;
         }
     }
-    
+
     public static function readAll($conn,$table,$condition){
         $sql = "SELECT * FROM {$table} WHERE $condition";
         // echo $sql;
@@ -56,18 +56,18 @@ class Crud
     }
 
     public static function read($conn,$table,$condition){
-       $sql = "SELECT * FROM $table WHERE $condition"; 
-       $statement = $conn->prepare($sql);
-       $statement->execute();
-       $result = $statement->fetch(PDO::FETCH_ASSOC);
-       if($result){   
+        $sql = "SELECT * FROM $table WHERE $condition";
+        $statement = $conn->prepare($sql);
+        $statement->execute();
+        $result = $statement->fetch(PDO::FETCH_ASSOC);
+        if($result){
             $keys = array_keys($result);
             $data["keys"] = $keys;
-            $data["result"]=$result; 
+            $data["result"]=$result;
             return $data;
-       }else{
-           return false;
-       }
+        }else{
+            return false;
+        }
     }
 
     public static function count($conn,$table){
@@ -79,7 +79,7 @@ class Crud
     }
 
     function readAllForColumns($conn,$table,$columnString,$condition){
-        $sql ="SELECT $columnString FROM $table WHERE $condition"; 
+        $sql ="SELECT $columnString FROM $table WHERE $condition";
         $statement = $this->conn->prepare($sql);
         $statement->execute();
         $result = $statement->fetchAll();
@@ -95,21 +95,16 @@ class Crud
         return $result;
     }
 
-    function getIsFirstLogin($user_id){
-        $sql ="SELECT is_first_login FROM users WHERE user_id=$user_id";
+    function sendMentorMail($email){
+        include_once "../classes/Mailer.class.php";
+        $mailer=new Mailer();
+        $subject = "Team-7 Mentor Registration";
 
-        $statement = $this->conn->prepare($sql);
-        $statement->execute();
-        $result = $statement->fetchAll(PDO::FETCH_ASSOC);
-        return $result;
-    }
+        $base_url_link ="http://localhost/team-7/includes/changePassword.php?XSRS=$email";
+        $body = "$base_url_link";
 
-    function getUserEmailByID($user_id){
-        $sql ="SELECT user_email FROM users WHERE user_id=$user_id";
 
-        $statement = $this->conn->prepare($sql);
-        $statement->execute();
-        $result = $statement->fetchAll(PDO::FETCH_ASSOC);
-        return $result[0]['user_email'];
+        return( $mailer->send_mail($email, $body, $subject));
+
     }
 }

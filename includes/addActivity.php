@@ -1,25 +1,9 @@
-<?php
-session_start();
-if(!isset($_SESSION['user_id'])){
-    die("failed");
-}
-
-include_once("../classes/Database.class.php");
-include_once("../classes/Attendance.class.php");
-
-$ob = new Database();
-$conn = $ob->getConnection();
-
-$obj = new Attendance();
-
-$results = $obj->getAllStudents($conn);
-
-?>
-
-
 <!DOCTYPE html>
 <html>
   <head>
+
+
+  
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <title>AdminLTE 2 | Dashboard</title>
@@ -29,9 +13,6 @@ $results = $obj->getAllStudents($conn);
       name="viewport"
     />
     <!-- Bootstrap 3.3.7 -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
     <link
       rel="stylesheet"
       href="../assets/bower_components/bootstrap/dist/css/bootstrap.min.css"
@@ -87,6 +68,30 @@ $results = $obj->getAllStudents($conn);
       rel="stylesheet"
       href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic"
     />
+
+    <script type='text/javascript'>
+
+   
+document.addEventListener("DOMContentLoaded", function() {
+  loadOptions();
+});
+
+      function loadOptions()
+      {
+      
+        //Retrieve theme arr from database
+        arr=[11,22,33,44,55];
+
+        for(var i=0;i<arr.length;i++)
+        {
+          var option = document.createElement("option");
+          option.text = arr[i];
+          option.value = arr[i];
+          var select = document.getElementById("theme");
+            select.appendChild(option);
+        }
+      }
+</script>
   </head>
   <body class="hold-transition skin-blue sidebar-mini">
     <div class="wrapper">
@@ -94,7 +99,6 @@ $results = $obj->getAllStudents($conn);
 
         <!-- header goes here -->
         <?php
-        $name = $_SESSION['user_name'];
         include_once ("../includes/templates/header.php");
         ?>
         <!-- header ends -->
@@ -102,9 +106,7 @@ $results = $obj->getAllStudents($conn);
 
       <!-- Left side column. contains the logo and sidebar -->
       <!-- side bar goes ehre -->
-      <?php
-      include_once ("../includes/templates/navbar.php");
-      ?>
+
       <!-- side bar ends -->
 
       <!-- Content Wrapper. Contains page content -->
@@ -122,10 +124,52 @@ $results = $obj->getAllStudents($conn);
             <li class="active">Dashboard</li>
           </ol>
         </section>
+        <section class="content">
+      <div class="row">
+        <!-- left column -->
+        <div class="col-md-6">
 
+        <div class="box box-primary">
+            <div class="box-header with-border">
+              <h3 class="box-title">Add Activity</h3>
+            </div>
+            <!-- /.box-header -->
+            <!-- form start -->
+            <form role="form" action="" method="post" enctype="multipart/form-data">
+              <div class="box-body">
+               
+                <div class="form-group">
+                  <label>Theme</label>
+                  <select id="theme" class="form-control select2" style="width: 100%;">
+                
+                </select>
+                   </div>
+                <div class="form-group">
+                  <label>Activity Name</label>
+                  <input type="text" class="form-control" name="activity_name">
+                </div>
 
-        <!-- BODY GOES HERE -->
-        
+                <div class="form-group">
+                  <label>Description</label>
+                  <input type="text" class="form-control" name="description">
+                </div>
+              
+              </div>
+              <!-- /.box-body -->
+
+              <div class="box-footer">
+                <input type="submit" class="btn btn-primary" name="changePass" value="Add Activity"> 
+              </div>
+            </form>
+          </div>
+    
+        </div>
+        </div>
+        </section>
+
+  </div>
+  <!-- /.form-box -->
+</div>
         <!-- BODY ENDS HERE -->
 
 
@@ -135,7 +179,7 @@ $results = $obj->getAllStudents($conn);
 
         <!-- Footer start -->
         <?php
-        include_once("../includes/templates/footer.php");
+        include_once("../includes/footer.php");
         ?>
         <!-- Footer end -->
     </div>
