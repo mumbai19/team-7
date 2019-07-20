@@ -228,9 +228,9 @@ document.addEventListener("DOMContentLoaded", function() {
              
                 <div class="form-group" id="parameter_fields"> 
                   <label for="text">Parameter</label>
-                  <input type="text" class="form-control" id="parameter" >
+                  <input type="text" class="form-control" id="parameter" placeholder="Add More Parameter(Optional)">
                   <br>
-                  <button type="button" id="single_add_button" class="btn btn-primary" onclick="append_parameter()">Add</button>
+                  <button type="button" id="single_add_button" style="float: right;" class="btn btn-primary" onclick="append_parameter()">Add</button>
                 </div>
              
                 <div class="form-group">
