@@ -5,7 +5,6 @@ include_once "../classes/Session.class.php";
 Session::startSession();
 $db=(new Database())->getConnection();
 $crud=new Crud($db);
-<<<<<<< HEAD
 $email=$crud->getUserEmailByID($_SESSION['user_id']);
 if(isset($_POST['regMentor'])){
 
@@ -34,23 +33,6 @@ if(isset($_POST['regMentor'])){
     header("Location: dashboard.php");
 
 
-=======
-if(isset($_POST['regMentor'])){
-    
-    $condition="user_email='usr@gmail.com' ";
-    extract($_POST);
-    $data=array(
-      'user_first_name' => $mentorFname,
-      'user_last_name' => $mentorLname,
-      'user_gender' => $mentorGender,
-      'user_phone' => $mentorPhone,
-      'created_by' =>1,
-      'is_deleted' => 0,        
-      'user_role_id' => 2,
-    );
-
-    $crud->update($db,'users',$data,$condition);
->>>>>>> 659db74b3ed6090777ec6836301464d632831b80
 }
 ?>
 
