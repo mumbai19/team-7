@@ -1,6 +1,6 @@
 <?php
-include_once "Crud.class.php";
-include_once "Database.class.php";
+include_once "../classes/Crud.class.php";
+include_once "../classes/Database.class.php";
 $conn=(new Database())->getConnection();
 class Session{
 
@@ -30,8 +30,8 @@ class Session{
     public function unsetSession(){
         $_SESSION['user_id'] = "";
         $_SESSION['user_name']="";
-        $_SESSION['user_occupation']="";
-        return session_destroy();
+        $_SESSION['user_role_type']="";
+
     }
 
     public function setCookies($signed_in){

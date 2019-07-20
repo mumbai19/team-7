@@ -35,8 +35,9 @@ class Crud
             $i++;
         }
         $sql = "UPDATE $table SET $columnValueSet WHERE $condition";
+        echo $sql;
         $ps =  $conn->prepare($sql);
-        
+
         $result = $ps->execute();
         if($result){
             return $ps->rowCount();
@@ -92,5 +93,23 @@ class Crud
         $statement->execute();
         $result = $statement->fetchAll(PDO::FETCH_ASSOC);
         return $result;
+    }
+
+    function getIsFirstLogin($user_id){
+        $sql ="SELECT is_first_login FROM users WHERE user_id=$user_id";
+
+        $statement = $this->conn->prepare($sql);
+        $statement->execute();
+        $result = $statement->fetchAll(PDO::FETCH_ASSOC);
+        return $result;
+    }
+
+    function getUserEmailByID($user_id){
+        $sql ="SELECT user_email FROM users WHERE user_id=$user_id";
+
+        $statement = $this->conn->prepare($sql);
+        $statement->execute();
+        $result = $statement->fetchAll(PDO::FETCH_ASSOC);
+        return $result[0]['user_email'];
     }
 }

@@ -1,3 +1,22 @@
+<?php
+
+session_start();
+if(!isset($_SESSION['user_id'])){
+    die("failed");
+}
+include_once("../classes/Database.class.php");
+include_once("../classes/Attendance.class.php");
+
+$ob = new Database();
+$conn = $ob->getConnection();
+
+$obj = new Attendance();
+
+$results = $obj->getAllStudents($conn);
+
+?>
+
+
 <!DOCTYPE html>
 <html>
   <head>
@@ -68,6 +87,8 @@
       rel="stylesheet"
       href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic"
     />
+    <link rel="manifest" href="../manifest.json">
+
   </head>
   <body class="hold-transition skin-blue sidebar-mini">
     <div class="wrapper">
@@ -75,6 +96,7 @@
 
         <!-- header goes here -->
         <?php
+        $name = $_SESSION['user_name'];
         include_once ("../includes/templates/header.php");
         ?>
         <!-- header ends -->
@@ -105,39 +127,36 @@
 
 
         <!-- BODY GOES HERE -->
+        <form action="script-files/insertAttendance.php" method="post">
 
-		 <section class="content">
-	  
-         <form>
-<!-- Loop starts Here-->
-<div class="row">
+
+
+        <?php
+        foreach($results as $result){
+            echo $result['student_id']."";?>
+
     
-      <label>Name:</label>
-     
+    <label><?php echo $result['student_first_name']." ".$result['student_last_name'] ?></label>
+   
+  <label class="radio-inline">
+            <input type="radio" name="<?php echo $result['student_id'] ?>" value="present"> Present
+            </label>
     <label class="radio-inline">
-      <input type="radio" name="attendance_check" >Present
-    </label>
-    <label class="radio-inline">
-      <input type="radio" name="attendance_check" checked>Absent
-    </label>
+            <input type="radio" name="<?php echo $result['student_id'] ?>" value="absent"> Absent <br>
+            </label>
 
     
-  </div>
-   <!-- Loop Ends Here--> 
+<br>
+            <?php
+        }
+        ?>
 
-    
-    <div class="row" style="al">
-               &nbsp;&nbsp;&nbsp; <button type="submit" class="btn btn-primary">Submit</button>
-              </div>
-    </form> 
-    
+<!-- <input type="radio" name="gender" value="male"> Male<br>
+<input type="radio" name="gender" value="female"> Female<br> -->
 
-	  </section>
-		
-		
-		
-		
-		
+        <button type="submit" name="attendance">Submit</button>
+
+        </form>
         <!-- BODY ENDS HERE -->
 
 

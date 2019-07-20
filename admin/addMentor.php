@@ -1,6 +1,41 @@
+<?php
+include_once "../classes/Database.class.php";
+$conn=(new Database())->getConnection();
+include_once "./classes/AdminCrud.class.php";
+$crude=new AdminCrud($conn);
+
+if(isset($_POST['addMentor'])){
+    extract($_POST);
+    $data=array(
+        'user_email'=>$email,
+        'user_role_id' => 2,
+    );
+    $id=$crude->create($conn,'users',$data);
+    echo $program_id;
+     $pid=split(")",$program_id);
+             $data=array(
+                     'user_id'=>$id,
+                     'prog_id'=>$pid[0],
+                 'batch' => $batch
+             );
+             $crude->create($conn,'mentor',$data);
+             $crude->sendMentorMail($email);
+}
+
+$p1="";
+$data=array();
+$results=$crude->readAll($conn,"programme",1);
+foreach($results as $result)
+{
+   array_push($data,$result["programme_id"].")".$result["programme_name"]);
+}
+?>
+
 <!DOCTYPE html>
 <html>
-  <head>
+<head>
+ 
+  
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <title>AdminLTE 2 | Dashboard</title>
@@ -65,6 +100,47 @@
       rel="stylesheet"
       href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic"
     />
+
+    <script type='text/javascript'>
+
+   
+document.addEventListener("DOMContentLoaded", function() {
+  loadOptions();
+});
+
+      function loadOptions()
+      {
+      
+        //Retrieve theme arr from database
+
+        
+
+        arr=<?php echo json_encode($data) ?>
+
+        for(var i=0;i<arr.length;i++)
+        {
+          var option = document.createElement("option");
+          option.text = arr[i];
+          option.value = arr[i];
+          var select = document.getElementById("program_id");
+            select.appendChild(option);
+        }
+
+
+
+        //Retrieve batch arr from database
+        arr1=["Batch 1","Batch 2"];
+
+        for(var i=0;i<arr1.length;i++)
+        {
+          var option = document.createElement("option");
+          option.text = arr1[i];
+          option.value = arr1[i];
+          var select = document.getElementById("batch");
+            select.appendChild(option);
+        }
+      }
+</script>
   </head>
   <body class="hold-transition skin-blue sidebar-mini">
     <div class="wrapper">
@@ -79,9 +155,7 @@
 
       <!-- Left side column. contains the logo and sidebar -->
       <!-- side bar goes ehre -->
-      <?php
-      include_once ("../includes/templates/navbar.php");
-      ?>
+
       <!-- side bar ends -->
 
       <!-- Content Wrapper. Contains page content -->
@@ -106,23 +180,39 @@
 
         <div class="box box-primary">
             <div class="box-header with-border">
-              <h3 class="box-title">Quick Example</h3>
+              <h3 class="box-title">Add Activity</h3>
             </div>
             <!-- /.box-header -->
             <!-- form start -->
-            <form role="form">
+            <form role="form" action="" method="post" enctype="multipart/form-data">
               <div class="box-body">
+               
                 <div class="form-group">
-                  <label for="text">Parameter</label>
-                  <input type="text" class="form-control" id="parameter" >
+                  <label>Email</label>
+                  <input type="email" class="form-control" name="email">
+                  
+                
+                </select>
+                   </div>
+                <div class="form-group">
+                  <label>Programme Id</label>
+                  <select id="program_id" class="form-control select2" style="width: 100%;">
+                
+                </select>
                 </div>
-             
+
+                <div class="form-group">
+                  <label>Batch</label>
+                   <select id="batch" class="form-control select2" style="width: 100%;">
+                
+                </select>
+                </div>
               
               </div>
               <!-- /.box-body -->
 
               <div class="box-footer">
-                <button type="submit" class="btn btn-primary">Add</button>
+                <input type="submit" class="btn btn-primary" name="changePaddMentor" id="addMentor" value="Add Mentor"> 
               </div>
             </form>
           </div>
@@ -186,3 +276,20 @@
     <script src="../assets/dist/js/demo.js"></script>
   </body>
 </html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
