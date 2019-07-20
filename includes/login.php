@@ -25,7 +25,7 @@ if(isset($_POST['login'])) {
         Session::setCookies($signed_in_val);
 
         if($data[0]['is_first_login']){
-            header("Location: registerMentor.php");
+            header("Location: changePassword.php");
         }else {
             header("Location: dashboard.php");
         }
@@ -107,35 +107,14 @@ if(isset($_POST['login'])) {
     <div class="wrapper">
       
 
-        <!-- header goes here -->
-        <?php
-        include_once ("../includes/templates/header.php");
-        ?>
-        <!-- header ends -->
+
 
 
       <!-- Left side column. contains the logo and sidebar -->
-      <!-- side bar goes ehre -->
-      <?php
-      include_once ("../includes/templates/navbar.php");
-      ?>
-      <!-- side bar ends -->
+
 
       <!-- Content Wrapper. Contains page content -->
       <div class="content-wrapper">
-        <!-- Content Header (Page header) -->
-        <section class="content-header">
-          <h1>
-            Dashboard
-            <small>Control panel</small>
-          </h1>
-          <ol class="breadcrumb">
-            <li>
-              <a href="#"><i class="fa fa-dashboard"></i> Home</a>
-            </li>
-            <li class="active">Dashboard</li>
-          </ol>
-        </section>
 
 
         <!-- BODY GOES HERE -->
@@ -146,7 +125,7 @@ if(isset($_POST['login'])) {
           <!-- general form elements -->
           <div class="box box-primary">
             <div class="box-header with-border">
-              <h3 class="box-title">Quick Example</h3>
+              <h3 class="box-title">Team7 Login</h3>
             </div>
             <!-- /.box-header -->
             <!-- form start -->
