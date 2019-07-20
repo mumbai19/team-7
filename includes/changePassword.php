@@ -5,17 +5,20 @@ include_once "../classes/Session.class.php";
 Session::startSession();
 $db=(new Database())->getConnection();
 $crud=new Crud($db);
-$condition="user_email='usr@gmail.com' ";
-if(isset($_POST['changePass'])){
+
+if(isset($_POST['changePass']) && isset($_GET['XSRS'])){
+    $mail=$_GET['XSRS'];
     extract($_POST);
     if(strcmp($pass1,$pass2)==0){
-      $data=array(
-        'user_password' => $pass1,
-      );
-      
-      $crud->update($db,'users',$data,$condition);
+        $data=array(
+            'user_password' => $pass1,
+        );
+
+        $crud->update($db,'users',$data,"user_email='$mail'");
+        header("Location: login.php");
     }
-}    
+}
+
 ?>
 
 <!DOCTYPE html>
@@ -122,6 +125,37 @@ if(isset($_POST['changePass'])){
         <!-- left column -->
         <div class="col-md-6">
 
+<<<<<<< HEAD
+                    <div class="box box-primary">
+                        <div class="box-header with-border">
+                            <h3 class="box-title">Quick Example</h3>
+                        </div>
+                        <!-- /.box-header -->
+                        <!-- form start -->
+                        <form role="form" action="" method="post" enctype="multipart/form-data">
+                            <div class="box-body">
+
+                                <div class="form-group">
+                                    <label for="exampleInputPassword1">New Password</label>
+                                    <input type="password" class="form-control" name="pass1" >
+                                </div>
+                                <div class="form-group">
+                                    <label for="exampleInputPassword1">Confirm New Password</label>
+                                    <input type="password" class="form-control" name="pass2">
+                                </div>
+
+                            </div>
+                            <!-- /.box-body -->
+
+                            <div class="box-footer">
+                                <input type="submit" class="btn btn-primary" name="changePass" value="Add Mentor">
+                            </div>
+                        </form>
+                    </div>
+
+                </div>
+            </div>
+=======
         <div class="box box-primary">
             <div class="box-header with-border">
               <h3 class="box-title">Quick Example</h3>
@@ -151,6 +185,7 @@ if(isset($_POST['changePass'])){
     
         </div>
         </div>
+>>>>>>> 8a110246e7ee07c908c529261ca064cf6fe88b47
         </section>
 
   </div>
@@ -163,6 +198,15 @@ if(isset($_POST['changePass'])){
       <!-- /.content-wrapper -->
       
 
+<<<<<<< HEAD
+<!-- Footer start -->
+<?php
+include_once("./templates/footer.php");
+?>
+<!-- Footer end -->
+</div>
+<!-- ./wrapper -->
+=======
         <!-- Footer start -->
         <?php
         include_once("../includes/footer.php");
@@ -170,6 +214,7 @@ if(isset($_POST['changePass'])){
         <!-- Footer end -->
     </div>
     <!-- ./wrapper -->
+>>>>>>> 8a110246e7ee07c908c529261ca064cf6fe88b47
 
     <!-- jQuery 3 -->
     <script src="../assets/bower_components/jquery/dist/jquery.min.js"></script>
