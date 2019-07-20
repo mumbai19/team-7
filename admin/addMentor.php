@@ -5,14 +5,15 @@ include_once "./classes/AdminCrud.class.php";
 $crude=new AdminCrud($conn);
 
 if(isset($_POST['addMentor'])){
+
     extract($_POST);
     $data=array(
         'user_email'=>$email,
         'user_role_id' => 2,
     );
-    $id=$crude->create($conn,'users',$data);
-    echo $program_id;
-     $pid=split(")",$program_id);
+        $id=$crude->create($conn,'users',$data);
+    echo $program_id;    
+     $pid=explode(')',$program_id);
              $data=array(
                      'user_id'=>$id,
                      'prog_id'=>$pid[0],
@@ -20,6 +21,7 @@ if(isset($_POST['addMentor'])){
              );
              $crude->create($conn,'mentor',$data);
              $crude->sendMentorMail($email);
+
 }
 
 $p1="";
@@ -196,14 +198,14 @@ document.addEventListener("DOMContentLoaded", function() {
                    </div>
                 <div class="form-group">
                   <label>Programme Id</label>
-                  <select id="program_id" class="form-control select2" style="width: 100%;">
+                  <select id="program_id" name="program_id" class="form-control select2" style="width: 100%;">
                 
                 </select>
                 </div>
 
                 <div class="form-group">
                   <label>Batch</label>
-                   <select id="batch" class="form-control select2" style="width: 100%;">
+                   <select id="batch" name="batch" class="form-control select2" style="width: 100%;">
                 
                 </select>
                 </div>
@@ -212,7 +214,7 @@ document.addEventListener("DOMContentLoaded", function() {
               <!-- /.box-body -->
 
               <div class="box-footer">
-                <input type="submit" class="btn btn-primary" name="changePaddMentor" id="addMentor" value="Add Mentor"> 
+                <input type="submit" class="btn btn-primary" name="addMentor" id="addMentor" value="Add Mentor"> 
               </div>
             </form>
           </div>
