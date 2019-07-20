@@ -9,7 +9,6 @@ if(isset($_POST['regMentor'])){
     
     $condition="user_email='usr@gmail.com' ";
     extract($_POST);
-    echo "  <script> alert('HEY'); </script>  ";
     $data=array(
       'user_first_name' => $mentorFname,
       'user_last_name' => $mentorLname,
