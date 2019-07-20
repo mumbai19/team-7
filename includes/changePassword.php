@@ -1,40 +1,3 @@
-
-<?php
-include_once "../classes/Database.class.php";
-include_once "../classes/Session.class.php";
-Session::startSession();
-$db=new Database();
-$conn=$db->getConnection();
-include_once "../classes/Crud.class.php";
-$crud=new Crud($conn);
-if(isset($_POST['login'])) {
-    extract($_POST);
-    $signed_in_val=0;
-    if($signed_in){
-        $signed_in_val=1;
-    }
-
-    $data = $crud->getUserEmail($user_email);
-    if ($data[0]['user_password'] === $_POST['password']) {
-        $values = array(
-            'user_id' => $data[0]['user_id'],
-            'user_name' => $data[0]['user_first_name'] . " " . $data[0]['user_last_name'],
-            'user_role_type' => $data[0]['user_role_id'],
-        );
-        Session::setSession($values);
-        Session::setCookies($signed_in_val);
-
-        if($data[0]['is_first_login']){
-            header("Location: changePassword.php");
-        }else {
-            header("Location: dashboard.php");
-        }
-
-    }
-}
-?>
-
-
 <!DOCTYPE html>
 <html>
   <head>
@@ -107,64 +70,72 @@ if(isset($_POST['login'])) {
     <div class="wrapper">
       
 
-
+        <!-- header goes here -->
+        <?php
+        include_once ("../includes/templates/header.php");
+        ?>
+        <!-- header ends -->
 
 
       <!-- Left side column. contains the logo and sidebar -->
+      <!-- side bar goes ehre -->
 
+      <!-- side bar ends -->
 
       <!-- Content Wrapper. Contains page content -->
       <div class="content-wrapper">
-
-
-        <!-- BODY GOES HERE -->
+        <!-- Content Header (Page header) -->
+        <section class="content-header">
+          <h1>
+            Dashboard
+            <small>Control panel</small>
+          </h1>
+          <ol class="breadcrumb">
+            <li>
+              <a href="#"><i class="fa fa-dashboard"></i> Home</a>
+            </li>
+            <li class="active">Dashboard</li>
+          </ol>
+        </section>
         <section class="content">
       <div class="row">
         <!-- left column -->
         <div class="col-md-6">
-          <!-- general form elements -->
-          <div class="box box-primary">
+
+        <div class="box box-primary">
             <div class="box-header with-border">
-              <h3 class="box-title">Team7 Login</h3>
+              <h3 class="box-title">Quick Example</h3>
             </div>
             <!-- /.box-header -->
             <!-- form start -->
-            <form role="form" method="post" enctype="multipart/form-data" action="">
+            <form role="form">
               <div class="box-body">
+               
                 <div class="form-group">
-                  <div class="input-group">
-                    <span class="input-group-addon"><i class="fa fa-envelope"></i></span>
-                    <input type="text" class="form-control" placeholder="Email" name="user_email">
-                  </div>
+                  <label for="exampleInputPassword1">New Password</label>
+                  <input type="password" class="form-control" id="exampleInputPassword1" >
                 </div>
                 <div class="form-group">
-                  <div class="input-group">
-                    <span class="input-group-addon"><i class="fa fa-key"></i></span>
-                    <input type="text" class="form-control" placeholder="Password" name="password">
-                  </div>
+                  <label for="exampleInputPassword1">Confirm New Password</label>
+                  <input type="password" class="form-control" id="exampleInputPassword2">
                 </div>
-
-                <div class="checkbox">
-                  <label>
-                    <input type="checkbox" name="signed_in">
-                    Remember Me
-                  </label>
-                </div>
+              
               </div>
               <!-- /.box-body -->
 
               <div class="box-footer">
-                  <input type="submit" value="Login" name="login">
+                <button type="submit" class="btn btn-primary">Submit</button>
               </div>
             </form>
           </div>
-
-
+    
         </div>
+        </div>
+        </section>
 
-      </div>
-      <!-- /.row -->
-    </section>
+  </div>
+  <!-- /.form-box -->
+</div>
         <!-- BODY ENDS HERE -->
 
 
@@ -216,5 +187,4 @@ if(isset($_POST['login'])) {
     <!-- AdminLTE for demo purposes -->
     <script src="../assets/dist/js/demo.js"></script>
   </body>
-
 </html>

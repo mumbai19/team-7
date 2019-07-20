@@ -17,11 +17,14 @@ class Session{
 
     public function setSession($data){
         extract($data);
+       // echo $user_id;
 //        echo $user_name;
 //        echo $user_occupation;
         $_SESSION['user_id'] = $user_id;
+
         $_SESSION['user_name']=$user_name;
-        $_SESSION['user_occupation']=$user_occupation;
+        $_SESSION['user_role_type']=$user_role_type;
+//        $_SESSION['user_occupation']=$user_occupation;
     }
 
     public function unsetSession(){
@@ -35,7 +38,7 @@ class Session{
         //	$cip=new Cipher();
 //        echo $signed_in;
         if($signed_in){
-            $cookie_name = "NAME_HERE";
+            $cookie_name = "TEAM7_USER";
             // $user_id_to_login = $cip->encrypt($user_id);
 //                    $encrypt_id =encrypt($user_id_to_login);
             $cookie_content = $_SESSION['user_id'];
@@ -43,10 +46,10 @@ class Session{
             $path = "/";
             setcookie($cookie_name, $cookie_content, $cookie_time, $path);
         } else{
-            $cookie_name = "NAME_HERE";
+            $cookie_name = "TEAM7_USER";
 //                    $user_id_to_login = $cip->encrypt($user_id);;
 
-            $cookie_content = $user_id;
+            $cookie_content =  $_SESSION['user_id'];
             $cookie_time = time() + 3600;
             $path = "/";
             setcookie($cookie_name, $cookie_content, $cookie_time, $path);
@@ -55,7 +58,7 @@ class Session{
 
     public function deleteCookies(){
 
-        $cookie_name = "NAME_HERE";
+        $cookie_name = "TEAM7_USER";
         $user_id_to_logout = $_SESSION['user_id'];
         $cookie_content = $user_id_to_logout;
         $cookie_time = time() - 86400 * 30;

@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.9.0.1
+-- version 4.8.3
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 20, 2019 at 03:11 PM
--- Server version: 10.3.16-MariaDB
--- PHP Version: 7.3.7
+-- Generation Time: Jul 20, 2019 at 04:18 PM
+-- Server version: 10.1.35-MariaDB
+-- PHP Version: 7.2.9
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -34,7 +34,7 @@ CREATE TABLE `activity` (
   `theme_id` int(11) NOT NULL,
   `description` varchar(255) NOT NULL,
   `media` text NOT NULL,
-  `created_on` datetime NOT NULL DEFAULT current_timestamp(),
+  `created_on` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `created_by` int(11) NOT NULL,
   `updated_on` datetime NOT NULL,
   `updated_by` int(11) NOT NULL,
@@ -53,7 +53,47 @@ CREATE TABLE `activity_programme` (
   `activity_program_id` int(11) NOT NULL,
   `activity_id` int(11) NOT NULL,
   `programme_id` int(11) NOT NULL,
-  `created_on` datetime NOT NULL DEFAULT current_timestamp(),
+  `created_on` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `created_by` int(11) NOT NULL,
+  `updated_on` datetime NOT NULL,
+  `updated_by` int(11) NOT NULL,
+  `is_deleted` int(11) NOT NULL,
+  `deleted_on` datetime NOT NULL,
+  `deleted_by` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `assessment`
+--
+
+CREATE TABLE `assessment` (
+  `assessment_id` int(11) NOT NULL,
+  `theme_id` int(11) NOT NULL,
+  `mentor_id` int(11) NOT NULL,
+  `student_id` int(11) NOT NULL,
+  `parameter_id` int(11) NOT NULL,
+  `created_on` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `created_by` int(11) NOT NULL,
+  `updated_on` datetime NOT NULL,
+  `updated_by` int(11) NOT NULL,
+  `is_deleted` int(11) NOT NULL,
+  `deleted_on` datetime NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `assessment_parameter_criteria`
+--
+
+CREATE TABLE `assessment_parameter_criteria` (
+  `assessment_parameter_criteria_id` int(11) NOT NULL,
+  `parameter_id` int(11) NOT NULL,
+  `parameter_criteria_name` varchar(255) NOT NULL,
+  `parameter_criteria_value` int(11) NOT NULL,
+  `created_on` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `created_by` int(11) NOT NULL,
   `updated_on` datetime NOT NULL,
   `updated_by` int(11) NOT NULL,
@@ -69,10 +109,10 @@ CREATE TABLE `activity_programme` (
 --
 
 CREATE TABLE `attendance` (
-  `att_id` int(11) NOT NULL,
+  `attendance_id` int(11) NOT NULL,
   `student_id` int(11) NOT NULL,
   `isPresent` int(11) NOT NULL,
-  `created_on` datetime NOT NULL DEFAULT current_timestamp(),
+  `created_on` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `created_by` int(11) NOT NULL,
   `updated_on` datetime NOT NULL,
   `updated_by` int(11) NOT NULL,
@@ -92,7 +132,7 @@ CREATE TABLE `mentor` (
   `user_id` int(11) NOT NULL,
   `prog_id` int(11) NOT NULL,
   `batch` varchar(255) NOT NULL,
-  `created_on` datetime NOT NULL DEFAULT current_timestamp(),
+  `created_on` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `created_by` int(11) NOT NULL,
   `updated_on` datetime NOT NULL,
   `updated_by` int(11) NOT NULL,
@@ -112,7 +152,26 @@ CREATE TABLE `mentor_programme` (
   `mentor_id` int(11) NOT NULL,
   `programme_id` int(11) NOT NULL,
   `batch` varchar(255) NOT NULL,
-  `created_on` datetime NOT NULL DEFAULT current_timestamp(),
+  `created_on` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `created_by` int(11) NOT NULL,
+  `updated_on` datetime NOT NULL,
+  `updated_by` int(11) NOT NULL,
+  `is_deleted` int(11) NOT NULL,
+  `deleted_on` datetime NOT NULL,
+  `deleted_by` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `parameters`
+--
+
+CREATE TABLE `parameters` (
+  `parameter_id` int(11) NOT NULL,
+  `parameter_name` varchar(255) NOT NULL,
+  `mentor_id` int(11) NOT NULL,
+  `created_on` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `created_by` int(11) NOT NULL,
   `updated_on` datetime NOT NULL,
   `updated_by` int(11) NOT NULL,
@@ -130,7 +189,7 @@ CREATE TABLE `mentor_programme` (
 CREATE TABLE `programme` (
   `programme_id` int(11) NOT NULL,
   `programme_name` varchar(255) NOT NULL,
-  `created_on` datetime NOT NULL DEFAULT current_timestamp(),
+  `created_on` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `created_by` int(11) NOT NULL,
   `deleted_by` int(11) NOT NULL,
   `deleted_on` datetime NOT NULL,
@@ -161,7 +220,7 @@ CREATE TABLE `savings` (
   `student_id` int(11) NOT NULL,
   `user_id` int(11) NOT NULL,
   `amount` varchar(255) NOT NULL,
-  `created_on` datetime NOT NULL DEFAULT current_timestamp(),
+  `created_on` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `created_by` int(11) NOT NULL,
   `updated_on` datetime NOT NULL,
   `updated_by` int(11) NOT NULL,
@@ -181,9 +240,9 @@ CREATE TABLE `savings_isdue` (
   `savings_id` int(11) NOT NULL,
   `month_amount` varchar(255) NOT NULL,
   `is_due` int(2) NOT NULL,
-  `created_on` datetime NOT NULL DEFAULT current_timestamp(),
+  `created_on` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `created_by` int(11) NOT NULL,
-  `updated_on` datetime DEFAULT current_timestamp(),
+  `updated_on` datetime DEFAULT CURRENT_TIMESTAMP,
   `updated_by` int(11) NOT NULL,
   `is_deleted` int(2) NOT NULL,
   `deleted_on` datetime NOT NULL,
@@ -201,12 +260,12 @@ CREATE TABLE `starchart` (
   `student_id` int(11) NOT NULL,
   `mentor_id` int(11) NOT NULL,
   `param_criteria_id` int(11) NOT NULL,
-  `created_on` datetime NOT NULL DEFAULT current_timestamp(),
+  `created_on` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `created_by` int(11) NOT NULL,
   `updated_on` datetime NOT NULL,
   `updated_by` int(11) NOT NULL,
   `is_deleted` int(11) NOT NULL,
-  `deleted_on` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+  `deleted_on` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `deleted_by` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -220,7 +279,7 @@ CREATE TABLE `starchart_parameter` (
   `starchart_parameter_id` int(11) NOT NULL,
   `starchart_parameter_name` varchar(255) NOT NULL,
   `mentor_id` int(11) NOT NULL,
-  `created_on` datetime NOT NULL DEFAULT current_timestamp(),
+  `created_on` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `created_by` int(11) NOT NULL,
   `updated_on` datetime NOT NULL,
   `updated_by` int(11) NOT NULL,
@@ -239,7 +298,7 @@ CREATE TABLE `starchart_parameter_criteria` (
   `starchart_parameter_id` int(11) NOT NULL,
   `starchart_parameter_criteria_name` varchar(255) NOT NULL,
   `starchart_parameter_criteria_value` varchar(10) NOT NULL,
-  `created_on` datetime NOT NULL DEFAULT current_timestamp(),
+  `created_on` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `created_by` int(11) NOT NULL,
   `updated_on` datetime NOT NULL,
   `updated_by` int(11) NOT NULL,
@@ -259,7 +318,8 @@ CREATE TABLE `student` (
   `student_first_name` varchar(255) NOT NULL,
   `student_last_name` varchar(255) NOT NULL,
   `student_school` varchar(255) NOT NULL,
-  `created_on` datetime NOT NULL DEFAULT current_timestamp(),
+  `student_batch` varchar(255) NOT NULL,
+  `created_on` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `created_by` int(11) NOT NULL,
   `updated_on` datetime NOT NULL,
   `updated_by` int(11) NOT NULL,
@@ -278,7 +338,7 @@ CREATE TABLE `student_programme` (
   `student_programme_id` int(11) NOT NULL,
   `student_id` int(11) NOT NULL,
   `programme_id` int(11) NOT NULL,
-  `created_on` datetime NOT NULL DEFAULT current_timestamp(),
+  `created_on` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `created_by` int(11) NOT NULL,
   `updated_on` datetime NOT NULL,
   `updated_at` int(11) NOT NULL,
@@ -296,7 +356,7 @@ CREATE TABLE `student_programme` (
 CREATE TABLE `theme` (
   `theme_id` int(11) NOT NULL,
   `theme_name` varchar(255) NOT NULL,
-  `created_on` datetime NOT NULL DEFAULT current_timestamp(),
+  `created_on` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `created_by` int(11) NOT NULL,
   `updated_on` datetime NOT NULL,
   `updated_by` int(11) NOT NULL,
@@ -320,9 +380,9 @@ CREATE TABLE `users` (
   `user_email` varchar(255) NOT NULL,
   `user_password` text NOT NULL,
   `user_role_id` int(11) NOT NULL,
-  `created_on` datetime NOT NULL DEFAULT current_timestamp(),
+  `created_on` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `created_by` int(11) NOT NULL,
-  `updated_on` datetime NOT NULL DEFAULT current_timestamp(),
+  `updated_on` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `updated_by` int(11) NOT NULL,
   `is_deleted` int(11) NOT NULL,
   `deleted_on` datetime NOT NULL,
@@ -340,7 +400,7 @@ CREATE TABLE `user_role_type` (
   `user_role_type_name` varchar(255) NOT NULL,
   `user_hierarchy` int(11) NOT NULL,
   `created_by` int(11) NOT NULL,
-  `created_on` datetime NOT NULL DEFAULT current_timestamp(),
+  `created_on` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `updated_by` int(11) NOT NULL,
   `updated_on` datetime NOT NULL,
   `is_deleted` int(11) NOT NULL,
@@ -374,10 +434,22 @@ ALTER TABLE `activity_programme`
   ADD PRIMARY KEY (`activity_program_id`);
 
 --
+-- Indexes for table `assessment`
+--
+ALTER TABLE `assessment`
+  ADD PRIMARY KEY (`assessment_id`);
+
+--
+-- Indexes for table `assessment_parameter_criteria`
+--
+ALTER TABLE `assessment_parameter_criteria`
+  ADD PRIMARY KEY (`assessment_parameter_criteria_id`);
+
+--
 -- Indexes for table `attendance`
 --
 ALTER TABLE `attendance`
-  ADD PRIMARY KEY (`att_id`);
+  ADD PRIMARY KEY (`attendance_id`);
 
 --
 -- Indexes for table `mentor`
@@ -390,6 +462,12 @@ ALTER TABLE `mentor`
 --
 ALTER TABLE `mentor_programme`
   ADD PRIMARY KEY (`mentor_programme_id`);
+
+--
+-- Indexes for table `parameters`
+--
+ALTER TABLE `parameters`
+  ADD PRIMARY KEY (`parameter_id`);
 
 --
 -- Indexes for table `programme`
@@ -474,10 +552,22 @@ ALTER TABLE `activity_programme`
   MODIFY `activity_program_id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
+-- AUTO_INCREMENT for table `assessment`
+--
+ALTER TABLE `assessment`
+  MODIFY `assessment_id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `assessment_parameter_criteria`
+--
+ALTER TABLE `assessment_parameter_criteria`
+  MODIFY `assessment_parameter_criteria_id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT for table `attendance`
 --
 ALTER TABLE `attendance`
-  MODIFY `att_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `attendance_id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `mentor`
@@ -490,6 +580,12 @@ ALTER TABLE `mentor`
 --
 ALTER TABLE `mentor_programme`
   MODIFY `mentor_programme_id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `parameters`
+--
+ALTER TABLE `parameters`
+  MODIFY `parameter_id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `programme`
