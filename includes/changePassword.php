@@ -97,15 +97,12 @@
             <li class="active">Dashboard</li>
           </ol>
         </section>
-
-
-        <!-- BODY GOES HERE -->
         <section class="content">
       <div class="row">
         <!-- left column -->
         <div class="col-md-6">
-          <!-- general form elements -->
-          <div class="box box-primary">
+
+        <div class="box box-primary">
             <div class="box-header with-border">
               <h3 class="box-title">Quick Example</h3>
             </div>
@@ -113,29 +110,16 @@
             <!-- form start -->
             <form role="form">
               <div class="box-body">
+               
                 <div class="form-group">
-                    <label>First Name</label>
-
-                    <input type="text" class="form-control">
+                  <label for="exampleInputPassword1">New Password</label>
+                  <input type="password" class="form-control" id="exampleInputPassword1" >
                 </div>
                 <div class="form-group">
-                    <label>Last Name</label>
-
-                    <input type="email" class="form-control" >
+                  <label for="exampleInputPassword1">Confirm New Password</label>
+                  <input type="password" class="form-control" id="exampleInputPassword2">
                 </div>
-                <div class="form-group">
-                    <label>Phone Number</label>
-
-                    <input type="number" class="form-control">
-                </div>
-                <div class="form-group">
-                  <label>Gender</label>
-                  <select class="form-control">
-                    <option>Male</option>
-                    <option>Female</option>
-                    <option>Others</option>
-                  </select>
-                </div>
+              
               </div>
               <!-- /.box-body -->
 
@@ -144,13 +128,14 @@
               </div>
             </form>
           </div>
-
-
+    
         </div>
+        </div>
+        </section>
 
-      </div>
-      <!-- /.row -->
-    </section>
+  </div>
+  <!-- /.form-box -->
+</div>
         <!-- BODY ENDS HERE -->
 
 
