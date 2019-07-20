@@ -102,53 +102,7 @@
 
 
         <!-- BODY GOES HERE -->
-        <section class="content">
-      <div class="row">
-        <!-- left column -->
-        <div class="col-md-6">
-          <!-- general form elements -->
-          <div class="box box-primary">
-            <div class="box-header with-border">
-              <h3 class="box-title">Quick Example</h3>
-            </div>
-            <!-- /.box-header -->
-            <!-- form start -->
-            <form role="form">
-              <div class="box-body">
-                <div class="form-group">
-                  <div class="input-group">
-                    <span class="input-group-addon"><i class="fa fa-envelope"></i></span>
-                    <input type="email" class="form-control" placeholder="Email">
-                  </div>
-                </div>
-                <div class="form-group">
-                  <div class="input-group">
-                    <span class="input-group-addon"><i class="fa fa-key"></i></span>
-                    <input type="email" class="form-control" placeholder="Password">
-                  </div>
-                </div>
 
-                <div class="checkbox">
-                  <label>
-                    <input type="checkbox"> 
-                    Remember Me
-                  </label>
-                </div>
-              </div>
-              <!-- /.box-body -->
-
-              <div class="box-footer">
-                <button type="submit" class="btn btn-primary">Submit</button>
-              </div>
-            </form>
-          </div>
-
-
-        </div>
-
-      </div>
-      <!-- /.row -->
-    </section>
         <!-- BODY ENDS HERE -->
 
 
