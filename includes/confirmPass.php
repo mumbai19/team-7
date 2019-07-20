@@ -34,7 +34,7 @@ if(isset($_POST['addMentor'])){
 <form action="" method="post" enctype="multipart/form-data">
 Enter New password: <input type="password" name="pass1"> <br>
 Confirm Password: <input type="password" name="pass2"> <br>
-<input type="submit" name="addMentor" value="Add Mentor"> 
+<input type="submit"  name="addMentor" value="Add Mentor"> 
 </form>
 
 </body>

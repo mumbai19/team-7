@@ -1,3 +1,23 @@
+<?php
+include_once "../classes/Database.class.php";
+include_once "../classes/Crud.class.php";
+include_once "../classes/Session.class.php";
+Session::startSession();
+$db=(new Database())->getConnection();
+$crud=new Crud($db);
+$condition="user_email='usr@gmail.com' ";
+if(isset($_POST['changePass'])){
+    extract($_POST);
+    if(strcmp($pass1,$pass2)==0){
+      $data=array(
+        'user_password' => $pass1,
+      );
+      
+      $crud->update($db,'users',$data,$condition);
+    }
+}    
+?>
+
 <!DOCTYPE html>
 <html>
   <head>
@@ -108,23 +128,23 @@
             </div>
             <!-- /.box-header -->
             <!-- form start -->
-            <form role="form">
+            <form role="form" action="" method="post" enctype="multipart/form-data">
               <div class="box-body">
                
                 <div class="form-group">
                   <label for="exampleInputPassword1">New Password</label>
-                  <input type="password" class="form-control" id="exampleInputPassword1" >
+                  <input type="password" class="form-control" name="pass1" >
                 </div>
                 <div class="form-group">
                   <label for="exampleInputPassword1">Confirm New Password</label>
-                  <input type="password" class="form-control" id="exampleInputPassword2">
+                  <input type="password" class="form-control" name="pass2">
                 </div>
               
               </div>
               <!-- /.box-body -->
 
               <div class="box-footer">
-                <button type="submit" class="btn btn-primary">Submit</button>
+                <input type="submit" class="btn btn-primary" name="changePass" value="Add Mentor"> 
               </div>
             </form>
           </div>

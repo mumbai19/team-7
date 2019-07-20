@@ -1,5 +1,3 @@
-<<<<<<< HEAD
-
 <?php
 include_once "../classes/Database.class.php";
 include_once "../classes/Crud.class.php";
@@ -7,9 +5,9 @@ include_once "../classes/Session.class.php";
 Session::startSession();
 $db=(new Database())->getConnection();
 $crud=new Crud($db);
-if(isset($_POST['addMentor'])){
+if(isset($_POST['regMentor'])){
     
-    $condition="user_email='xyzz@gmail.com' ";
+    $condition="user_email='usr@gmail.com' ";
     extract($_POST);
     $data=array(
       'user_first_name' => $mentorFname,
@@ -25,33 +23,6 @@ if(isset($_POST['addMentor'])){
 }
 ?>
 
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Touching lives</title>
-        <!-- JQuery -->
-    <script type="text/javascript" src="http://code.jquery.com/jquery-1.4.3.min.js" ></script> 
-</head>
-<body>
-
-
-<h1>Register mentor</h1>
-
-<form action="" method="post" enctype="multipart/form-data">
-First Name: <input type="text" name="mentorFname"> <br>
-Last Name: <input type="text" name="mentorLname"> <br>
-Gender:
-<input type="radio" name="mentorGender" value="Male"> Male 
-<input type="radio" name="mentorGender" value="Female"> Female<br>
-Phone: <input type="phone" name="mentorPhone"> <br>
-
-<input type="submit" name="addMentor" value="Add Mentor"> 
-</form>
-
-</body>
-</html>
-
-=======
 <!DOCTYPE html>
 <html>
   <head>
@@ -165,26 +136,26 @@ Phone: <input type="phone" name="mentorPhone"> <br>
             </div>
             <!-- /.box-header -->
             <!-- form start -->
-            <form role="form">
+            <form role="form" action="" method="post" enctype="multipart/form-data">
               <div class="box-body">
                 <div class="form-group">
                     <label>First Name</label>
 
-                    <input type="text" class="form-control">
+                    <input type="text" class="form-control" name="mentorFname">
                 </div>
                 <div class="form-group">
                     <label>Last Name</label>
 
-                    <input type="email" class="form-control" >
+                    <input type="text" class="form-control" name="mentorLname">
                 </div>
                 <div class="form-group">
                     <label>Phone Number</label>
 
-                    <input type="number" class="form-control">
+                    <input type="phone" class="form-control" name="mentorPhone">
                 </div>
                 <div class="form-group">
                   <label>Gender</label>
-                  <select class="form-control">
+                  <select class="form-control" name="mentorGender">
                     <option>Male</option>
                     <option>Female</option>
                     <option>Others</option>
@@ -194,7 +165,7 @@ Phone: <input type="phone" name="mentorPhone"> <br>
               <!-- /.box-body -->
 
               <div class="box-footer">
-                <button type="submit" class="btn btn-primary">Submit</button>
+                <input type="submit" class="btn btn-primary" name="regMentor" value="Register as Mentor"> 
               </div>
             </form>
           </div>
@@ -257,4 +228,4 @@ Phone: <input type="phone" name="mentorPhone"> <br>
     <script src="../assets/dist/js/demo.js"></script>
   </body>
 </html>
->>>>>>> 49950a0e268d8890ecb59dbcbc98cc766a96f798
+
