@@ -58,7 +58,7 @@ class Session{
 
     public function deleteCookies(){
 
-        $cookie_name = "NAME_HERE";
+        $cookie_name = "TEAM7_USER";
         $user_id_to_logout = $_SESSION['user_id'];
         $cookie_content = $user_id_to_logout;
         $cookie_time = time() - 86400 * 30;

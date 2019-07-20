@@ -1,22 +1,3 @@
-<?php
-
-session_start();
-if(!isset($_SESSION['user_id'])){
-    die("failed");
-}
-include_once("../classes/Database.class.php");
-include_once("../classes/Attendance.class.php");
-
-$ob = new Database();
-$conn = $ob->getConnection();
-
-$obj = new Attendance();
-
-$results = $obj->getAllStudents($conn);
-
-?>
-
-
 <!DOCTYPE html>
 <html>
   <head>
@@ -29,9 +10,6 @@ $results = $obj->getAllStudents($conn);
       name="viewport"
     />
     <!-- Bootstrap 3.3.7 -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
     <link
       rel="stylesheet"
       href="../assets/bower_components/bootstrap/dist/css/bootstrap.min.css"
@@ -94,7 +72,6 @@ $results = $obj->getAllStudents($conn);
 
         <!-- header goes here -->
         <?php
-        $name = $_SESSION['user_name'];
         include_once ("../includes/templates/header.php");
         ?>
         <!-- header ends -->
@@ -122,39 +99,41 @@ $results = $obj->getAllStudents($conn);
             <li class="active">Dashboard</li>
           </ol>
         </section>
+        <section class="content">
+      <div class="row">
+        <!-- left column -->
+        <div class="col-md-6">
 
+        <div class="box box-primary">
+            <div class="box-header with-border">
+              <h3 class="box-title">Quick Example</h3>
+            </div>
+            <!-- /.box-header -->
+            <!-- form start -->
+            <form role="form">
+              <div class="box-body">
+                <div class="form-group">
+                  <label for="text">Parameter</label>
+                  <input type="text" class="form-control" id="parameter" >
+                </div>
+             
+              
+              </div>
+              <!-- /.box-body -->
 
-        <!-- BODY GOES HERE -->
-        <form action="script-files/insertAttendance.php" method="post">
-
-
-
-        <?php
-        foreach($results as $result){
-            echo $result['student_id']."";?>
-
+              <div class="box-footer">
+                <button type="submit" class="btn btn-primary">Add</button>
+              </div>
+            </form>
+          </div>
     
-    <label><?php echo $result['student_first_name']." ".$result['student_last_name'] ?></label>
-   
-  <label class="radio-inline">
-            <input type="radio" name="<?php echo $result['student_id'] ?>" value="present"> Present
-            </label>
-    <label class="radio-inline">
-            <input type="radio" name="<?php echo $result['student_id'] ?>" value="absent"> Absent <br>
-            </label>
+        </div>
+        </div>
+        </section>
 
-    
-<br>
-            <?php
-        }
-        ?>
-
-<!-- <input type="radio" name="gender" value="male"> Male<br>
-<input type="radio" name="gender" value="female"> Female<br> -->
-
-        <button type="submit" name="attendance">Submit</button>
-
-        </form>
+  </div>
+  <!-- /.form-box -->
+</div>
         <!-- BODY ENDS HERE -->
 
 
@@ -164,7 +143,7 @@ $results = $obj->getAllStudents($conn);
 
         <!-- Footer start -->
         <?php
-        include_once("../includes/footer.php");
+        include_once("../includes/templates/footer.php");
         ?>
         <!-- Footer end -->
     </div>

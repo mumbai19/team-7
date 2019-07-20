@@ -1,9 +1,9 @@
 <?php
-
 session_start();
 if(!isset($_SESSION['user_id'])){
     die("failed");
 }
+
 include_once("../classes/Database.class.php");
 include_once("../classes/Attendance.class.php");
 
@@ -125,36 +125,7 @@ $results = $obj->getAllStudents($conn);
 
 
         <!-- BODY GOES HERE -->
-        <form action="script-files/insertAttendance.php" method="post">
-
-
-
-        <?php
-        foreach($results as $result){
-            echo $result['student_id']."";?>
-
-    
-    <label><?php echo $result['student_first_name']." ".$result['student_last_name'] ?></label>
-   
-  <label class="radio-inline">
-            <input type="radio" name="<?php echo $result['student_id'] ?>" value="present"> Present
-            </label>
-    <label class="radio-inline">
-            <input type="radio" name="<?php echo $result['student_id'] ?>" value="absent"> Absent <br>
-            </label>
-
-    
-<br>
-            <?php
-        }
-        ?>
-
-<!-- <input type="radio" name="gender" value="male"> Male<br>
-<input type="radio" name="gender" value="female"> Female<br> -->
-
-        <button type="submit" name="attendance">Submit</button>
-
-        </form>
+        
         <!-- BODY ENDS HERE -->
 
 
@@ -164,7 +135,7 @@ $results = $obj->getAllStudents($conn);
 
         <!-- Footer start -->
         <?php
-        include_once("../includes/footer.php");
+        include_once("../includes/templates/footer.php");
         ?>
         <!-- Footer end -->
     </div>
