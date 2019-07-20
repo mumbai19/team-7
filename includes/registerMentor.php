@@ -28,7 +28,7 @@ if(isset($_POST['regMentor'])){
         'user_role_type'=>2,
 
     );
-  //  Session::setSession($data);
+    Session::setSession($data);
 
     header("Location: dashboard.php");
 
