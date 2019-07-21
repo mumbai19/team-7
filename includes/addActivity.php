@@ -1,3 +1,14 @@
+<?php
+include_once "../classes/Database.class.php";
+include_once "../classes/Activity.class.php";
+include_once "../classes/Session.class.php";
+Session::startSession();
+$conn=(new Database())->getConnection();
+
+
+?>
+
+
 <!DOCTYPE html>
 <html>
   <head>

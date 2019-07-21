@@ -11,8 +11,9 @@ echo $_SESSION['user_name'];
 echo $_SESSION['user_role_type'];
 
 if($_SESSION['user_role_type'] == 2 ){
-    if($crud->getIsFirstLogin($_SESSION['user_id'])==0){
+    if(!$crud->getIsFirstLogin($_SESSION['user_id'])){
         header("Location: registerMentor.php");
+
     }else {
         header("Location: mentorDashboard.php");
     }
