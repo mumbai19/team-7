@@ -114,9 +114,17 @@ $mentor=new Mentor($db);
         extract($data[0]);
         ?>
 
-        <div style="background-color: #3c8dbc; width: 100px;height: 40px;margin-left: 20px;border-radius: 10px;">
-            <a href="showProgrammeStudents.php?p=<?php echo $programme_id;  ?>" style=" color: white;padding-left: 13px;margin-top: 35px;"><?php echo $programme_name; ?></a>
+        <div class="container">
+
+        <div style="background-color: #3c8dbc; width: 100px;height: 40px;border-radius: 10px;">
+        
+        <div class="text-center">
+        <a href="showProgrammeStudents.php?p=<?php echo $programme_id;  ?>" style=" color: white;vertical-align: middle"><?php echo $programme_name; ?></a>
+
         </div>
+        </div>
+        </div>
+       
         </body>
         <!-- BODY ENDS HERE -->
 
@@ -126,9 +134,7 @@ $mentor=new Mentor($db);
 
 
     <!-- Footer start -->
-    <?php
-    include_once("./templates/footer.php");
-    ?>
+
     <!-- Footer end -->
 </div>
 <!-- ./wrapper -->

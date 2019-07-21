@@ -152,7 +152,10 @@ $results = $obj->getAllStudents($conn,$_SESSION['user_id']);
             <!-- <input type="radio" name="gender" value="male"> Male<br>
             <input type="radio" name="gender" value="female"> Female<br> -->
             <input type="hidden" name="user" value=<?php echo $_SESSION['user_id'] ?>>
-            <button type="submit" name="attendance">Submit</button>
+            <div class="text-center">
+            <button type="submit" name="attendance" class="btn btn-primary">Submit</button>
+
+            </div>
 
         </form>
         <!-- BODY ENDS HERE -->
@@ -163,9 +166,7 @@ $results = $obj->getAllStudents($conn,$_SESSION['user_id']);
 
 
     <!-- Footer start -->
-    <?php
-    include_once("../includes/templates/footer.php");
-    ?>
+
     <!-- Footer end -->
 </div>
 <!-- ./wrapper -->

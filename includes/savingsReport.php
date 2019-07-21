@@ -115,12 +115,6 @@ $crud=new Crud($db);
                 Savings
                 <small>Mentor panel</small>
             </h1>
-            <ol class="breadcrumb">
-                <li>
-                    <a href="#"><i class="fa fa-dashboard"></i> Home</a>
-                </li>
-                <li class="active">Dashboard</li>
-            </ol>
         </section>
         <section class="content">
             <div class="row">
@@ -128,13 +122,11 @@ $crud=new Crud($db);
                 <div class="col-md-6">
 
                     <div class="box box-primary">
-                        <div class="box-header with-border">
-                            <h3 class="box-title"></h3>
-                        </div>
+                        
                         <!-- /.box-header -->
                         <!-- form start -->
                         <form role="form" action="" method="post" enctype="multipart/form-data">
-                            <div class="box-body">
+                            <div class="box-body" style="padding:0;">
 
                                 <?php
                                 if(isset($_POST['reportGen'])){
@@ -223,9 +215,7 @@ $crud=new Crud($db);
 
 
 <!-- Footer start -->
-<?php
-include_once("../includes/templates/footer.php");
-?>
+
 <!-- Footer end -->
 </div>
 <!-- ./wrapper -->

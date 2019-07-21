@@ -129,15 +129,10 @@ if(isset($_GET['id'])){
         <!-- Content Header (Page header) -->
         <section class="content-header">
           <h1>
-            Dashboard
+            Edit Activity
             <small>Control panel</small>
           </h1>
-          <ol class="breadcrumb">
-            <li>
-              <a href="#"><i class="fa fa-dashboard"></i> Home</a>
-            </li>
-            <li class="active">Dashboard</li>
-          </ol>
+          
         </section>
         <section class="content">
       <div class="row">
@@ -183,7 +178,7 @@ if(isset($_GET['id'])){
               </div>
               <!-- /.box-body -->
 
-              <div class="box-footer">
+              <div class="box-footer text-center">
                 <input type="submit" class="btn btn-primary" name="changePass" value="Edit Activity"> 
               </div>
             </form>

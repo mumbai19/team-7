@@ -129,7 +129,7 @@ $results=$mentor->getNamesOfAllStudentsForProgramme($_GET['p']);
                 <tr>
 
                     <td><?php echo $cnt; ?></td>
-                    <td><a href="showStudent.php?s=<?php echo $student_id ?>"><?php  echo $student_first_name." ".$student_last_name ?></a></td>
+                    <td><p href="showStudent.php?s=<?php echo $student_id ?>"><?php  echo $student_first_name." ".$student_last_name ?></p></td>
                         <td><?php echo $created_on; ?></td>
                     <?php } ?>
                 </tr>
@@ -145,9 +145,7 @@ $results=$mentor->getNamesOfAllStudentsForProgramme($_GET['p']);
 
 
     <!-- Footer start -->
-    <?php
-    include_once("./templates/footer.php");
-    ?>
+
     <!-- Footer end -->
 </div>
 <!-- ./wrapper -->

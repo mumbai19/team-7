@@ -103,12 +103,7 @@ $results=$act->getActivitiesForProgramme($_SESSION['user_id']);
                 Activities
                 <small>Mentor panel</small>
             </h1>
-            <ol class="breadcrumb">
-                <li>
-                    <a href="#"><i class="fa fa-dashboard"></i> Home</a>
-                </li>
-                <li class="active">Dashboard</li>
-            </ol>
+        
         </section>
 
 
@@ -119,7 +114,7 @@ $results=$act->getActivitiesForProgramme($_SESSION['user_id']);
         <section class="content">
             <div class="row">
                 <div class="col-xs-12">
-                    <div class="box">
+                    <div class="box box-primary">
                         <div class="box-header">
                             <h3 class="box-title">Hover Data Table</h3>
                         </div>
@@ -170,9 +165,7 @@ $results=$act->getActivitiesForProgramme($_SESSION['user_id']);
 
 
     <!-- Footer start -->
-    <?php
-    include_once("templates/footer.php");
-    ?>
+
     <!-- Footer end -->
 </div>
 <!-- ./wrapper -->

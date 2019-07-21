@@ -182,22 +182,7 @@ foreach($result as $res)
                     </div>
 
                 </div>
-<<<<<<< HEAD
-              
-              </div>
-              <!-- /.box-body -->
-
-              <div class="box-footer text-center">
-                <input type="submit" class="btn btn-primary" name="changePass" value="Add Activity"> 
-              </div>
-            </form>
-          </div>
-    
-        </div>
-        </div>
-=======
             </div>
->>>>>>> 93bb1f74b03a1f26a1ce453d0ec584cee675a6b4
         </section>
 
     </div>

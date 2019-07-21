@@ -114,27 +114,22 @@ foreach ($results as $result){
         <!-- Content Header (Page header) -->
         <section class="content-header">
           <h1>
-            Dashboard
-            <small>Control panel</small>
-          </h1>
-          <ol class="breadcrumb">
-            <li>
-              <a href="#"><i class="fa fa-dashboard"></i> Home</a>
-            </li>
-            <li class="active">Dashboard</li>
-          </ol>
+            Statistics Chart
+          </h1> 
         </section>
 
 
         <!-- BODY GOES HERE -->
        <!-- line chart canvas element -->
 <div>
+      <div class="text-center mt-5">
       <select id="selChart">
       <option value="">Select</option>
       <option value="bar">Bar</option>
       <option value="line">Line</option>
-      <option value="pie">Pie</option>
      </select>
+      </div>
+      
     <!-- <select id="selMonth">
           <option value="">Select</option>
           <option value="All">All</option>
@@ -265,9 +260,7 @@ foreach ($results as $result){
       
 
         <!-- Footer start -->
-        <?php
-        include_once("../includes/footer.php");
-        ?>
+        
         <!-- Footer end -->
     </div>
     <!-- ./wrapper -->
