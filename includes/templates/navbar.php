@@ -25,13 +25,13 @@
 
             <li class="header">MENTOR</li>
             <li>
-              <a href="#"
+              <a href="attendance.php"
                 ><i class="fa fa-circle-o text-red"></i>
                 <span>Attendance</span></a
               >
             </li>
               <li>
-                  <a href="#"
+                  <a href="addAssessment.php"
                   ><i class="fa fa-circle-o text-red"></i>
                       <span>Assesment</span></a
                   >
