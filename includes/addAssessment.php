@@ -297,8 +297,8 @@ document.addEventListener("DOMContentLoaded", function() {
                 
                 </select>
                 </div>
-                
-                <input type="hidden" name="user" value=<?php $_SESSION['user_id'] ?>>
+                <?php echo $_SESSION['user_id']; ?>
+                <input type="hidden" name="user" value=<?php echo $_SESSION['user_id'] ?>>
              
              
                 
