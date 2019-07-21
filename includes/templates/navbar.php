@@ -10,7 +10,7 @@
               />
             </div>
             <div class="pull-left info">
-              <p><?php echo $name; ?></p>
+             <!-- <p><?php echo $name; ?></p>-->
             </div>
           </div>
 
