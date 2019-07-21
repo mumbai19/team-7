@@ -51,6 +51,14 @@ class Attendance{
         // }
     }
 
+    public function getAttendance($conn){
+        $sql = "SELECT * from attendance";
+        $ps = $conn->prepare($sql);
+        $ps->execute();
+        $result = $ps->fetchAll(PDO::FETCH_ASSOC);
+        return $result;
+    }
+
 }
 
 
