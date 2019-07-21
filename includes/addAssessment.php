@@ -46,7 +46,7 @@ foreach($parameters as $per){
 <head>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <title>AdminLTE 2 | Dashboard</title>
+    <title>Assessments</title>
     <!-- Tell the browser to be responsive to screen width -->
     <meta
             content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"
@@ -213,15 +213,10 @@ foreach($parameters as $per){
         <!-- Content Header (Page header) -->
         <section class="content-header">
             <h1>
-                Dashboard
-                <small>Control panel</small>
+                Assessments
+                <small>Mentor panel</small>
             </h1>
-            <ol class="breadcrumb">
-                <li>
-                    <a href="#"><i class="fa fa-dashboard"></i> Home</a>
-                </li>
-                <li class="active">Dashboard</li>
-            </ol>
+
         </section>
         <section class="content">
             <div class="row">
@@ -230,7 +225,7 @@ foreach($parameters as $per){
 
                     <div class="box box-primary">
                         <div class="box-header with-border">
-                            <h3 class="box-title">Quick Example</h3>
+
                         </div>
                         <!-- /.box-header -->
                         <!-- form start -->
@@ -273,7 +268,7 @@ foreach($parameters as $per){
 
                                     </select>
                                 </div>
-                                <?php echo $_SESSION['user_id']; ?>
+                               
                                 <input type="hidden" name="user" value=<?php echo $_SESSION['user_id'] ?>>
 
 

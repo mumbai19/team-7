@@ -138,7 +138,7 @@ if(isset($_POST['login'])) {
                 <div class="form-group">
                   <div class="input-group">
                     <span class="input-group-addon"><i class="fa fa-key"></i></span>
-                    <input type="text" class="form-control" placeholder="Password" name="password">
+                    <input type="password" class="form-control" placeholder="Password" name="password">
                   </div>
                 </div>
 
