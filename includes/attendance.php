@@ -12,7 +12,7 @@ $conn = $ob->getConnection();
 
 $obj = new Attendance();
 
-$results = $obj->getAllStudents($conn);
+$results = $obj->getAllStudents($conn,$_SESSION['user_id']);
 
 ?>
 
@@ -36,7 +36,7 @@ $results = $obj->getAllStudents($conn);
       rel="stylesheet"
       href="../assets/bower_components/bootstrap/dist/css/bootstrap.min.css"
     />
-    <link rel="manifest" href="manifest.json">
+    
     <!-- Font Awesome -->
     <link
       rel="stylesheet"
@@ -153,7 +153,7 @@ $results = $obj->getAllStudents($conn);
 
 <!-- <input type="radio" name="gender" value="male"> Male<br>
 <input type="radio" name="gender" value="female"> Female<br> -->
-
+<input type="hidden" name="user" value=<?php echo $_SESSION['user_id'] ?>>
         <button type="submit" name="attendance">Submit</button>
 
         </form>

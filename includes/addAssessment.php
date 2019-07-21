@@ -1,3 +1,58 @@
+<?php
+
+session_start();
+if(!isset($_SESSION['user_id'])){
+    die("failed");
+}
+include_once("../classes/Database.class.php");
+include_once("../classes/Attendance.class.php");
+include_once("../classes/Theme.class.php");
+
+
+$ob = new Database();
+$conn = $ob->getConnection();
+$obj = new Theme();
+$results = $obj->getAllThemes($conn);
+$obj3 = new Attendance();
+
+$students = $obj3->getAllStudents($conn,$_SESSION['user_id']);
+
+// print_r($results);
+
+$ids = array();
+$names = array();
+
+$idsp = array();
+$namesp = array();
+
+foreach($results as $res){
+  extract($res);
+  array_push($ids,$theme_id);
+}
+// print_r($ids);
+
+foreach($results as $res){
+  extract($res);
+  array_push($names,$theme_name);
+}
+// print_r($names);
+
+$parameters = $obj->getParametersForProgram($conn);
+
+foreach($parameters as $per){
+  extract($per);
+  array_push($idsp,$parameter_id);
+}
+
+foreach($parameters as $per){
+  extract($per);
+  array_push($namesp,$parameter_name);
+}
+
+
+
+?>
+
 <!DOCTYPE html>
 <html>
   <head>
@@ -14,7 +69,7 @@
       rel="stylesheet"
       href="../assets/bower_components/bootstrap/dist/css/bootstrap.min.css"
     />
-    <link rel="manifest" href="manifest.json">
+    
     <!-- Font Awesome -->
     <link
       rel="stylesheet"
@@ -65,13 +120,16 @@ document.addEventListener("DOMContentLoaded", function() {
       {
       
         //Retrieve theme arr from database
-        arr=[11,22,33,44,55];
+        // arr=[11,22,33,44,55];
+        var data1 =<?php echo json_encode($ids);?>;
+        var data2 = <?php echo json_encode($names);?>;
 
-        for(var i=0;i<arr.length;i++)
+        for(var i=0;i<data1.length;i++)
         {
+          
           var option = document.createElement("option");
-          option.text = arr[i];
-          option.value = arr[i];
+          option.text = data2[i];
+          option.value = data1[i];
           var select = document.getElementById("theme");
             select.appendChild(option);
         }
@@ -79,13 +137,15 @@ document.addEventListener("DOMContentLoaded", function() {
 
         //Retrieve Parameter arr from database
 
-        arr1=["Good","Very Good","Excellent"]; 
+        arr1=["Good","Very Good","Excellent"];
+        var data1 =<?php echo json_encode($idsp);?>;
+        var data2 = <?php echo json_encode($namesp);?>; 
 
-        for(var i=0;i<arr1.length;i++)
+        for(var i=0;i<data1.length;i++)
         {
           var option = document.createElement("option");
-          option.text = arr1[i];
-          option.value = arr1[i];
+          option.text = data2[i];
+          option.value = data1[i];
           var select = document.getElementById("parameter_dropdown");
             select.appendChild(option);
         }
@@ -159,6 +219,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
         <!-- header goes here -->
         <?php
+        $name = $_SESSION['user_id'];
         include_once ("../includes/templates/header.php");
         ?>
         <!-- header ends -->
@@ -197,13 +258,13 @@ document.addEventListener("DOMContentLoaded", function() {
             </div>
             <!-- /.box-header -->
             <!-- form start -->
-            <form role="form">
+            <form action="script-files/assessment.php" method="post" role="form">
               <div class="box-body">
              
               <div class="form-group">
                   <label for="text">Theme</label>
                 
-                <select id="theme" class="form-control select2" style="width: 100%;">
+                <select id="theme" name="theme" class="form-control select2" style="width: 100%;">
                 
                 </select>
             
@@ -212,7 +273,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
                 <div class="form-group">
                   <label for="text">Description</label>
-                  <input type="textarea" class="form-control" id="theme" >
+                  <input type="textarea" class="form-control" id="theme" name="des" >
                 </div>
              
              
@@ -220,22 +281,27 @@ document.addEventListener("DOMContentLoaded", function() {
              
                 <div class="form-group">
                   <label for="text">Parameter</label>
-                  <select id="parameter_dropdown" class="form-control select2" style="width: 100%;">
+                  <select id="parameter_dropdown" name="par" class="form-control select2" style="width: 100%;">
                 
                 </select>
                 </div>
-             
-             
-                <div class="form-group" id="parameter_fields"> 
-                  <label for="text">Parameter</label>
-                  <input type="text" class="form-control" id="parameter" placeholder="Add More Parameter(Optional)">
-                  <br>
-                  <button type="button" id="single_add_button" style="float: right;" class="btn btn-primary" onclick="append_parameter()">Add</button>
-                </div>
-             
+
                 <div class="form-group">
-                  <div id="container"/>  
+                  <label for="text">Student</label>
+                  <select  name="stud" class="form-control select2" style="width: 100%;">
+                  <?php
+                  foreach($students as $student){
+                    echo "<option value=".$student['student_id'].">".$student['student_first_name']." ".$student['student_last_name']."</option>";
+                  }
+                  ?>
+                
+                </select>
                 </div>
+                <?php echo $_SESSION['user_id']; ?>
+                <input type="hidden" name="user" value=<?php echo $_SESSION['user_id'] ?>>
+             
+             
+                
                 
               </div>
             
@@ -243,7 +309,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
               <div class="box-footer">
               <!--  <button type="button" class="btn btn-primary" onclick="addFields()">Add More</button>-->
-                <button type="submit" class="btn btn-primary">Submit
+                <button type="submit" name="parameter" class="btn btn-primary">Submit
               </div>
             </form>
           </div>
@@ -255,6 +321,8 @@ document.addEventListener("DOMContentLoaded", function() {
   </div>
   <!-- /.form-box -->
 </div>
+
+
         <!-- BODY ENDS HERE -->
 
 

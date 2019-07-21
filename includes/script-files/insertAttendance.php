@@ -8,7 +8,7 @@ $conn = $ob->getConnection();
 
 $obj = new Attendance();
 
-$results = $obj->getAllStudents($conn);
+$results = $obj->getAllStudents($conn,$_POST['user']);
 
 if(isset($_POST['attendance'])){
     
