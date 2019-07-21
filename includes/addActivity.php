@@ -1,3 +1,14 @@
+<?php
+include_once "../classes/Database.class.php";
+include_once "../classes/Activity.class.php";
+include_once "../classes/Session.class.php";
+Session::startSession();
+$conn=(new Database())->getConnection();
+
+
+?>
+
+
 <!DOCTYPE html>
 <html>
   <head>
@@ -113,16 +124,7 @@ document.addEventListener("DOMContentLoaded", function() {
       <div class="content-wrapper">
         <!-- Content Header (Page header) -->
         <section class="content-header">
-          <h1>
-            Dashboard
-            <small>Control panel</small>
-          </h1>
-          <ol class="breadcrumb">
-            <li>
-              <a href="#"><i class="fa fa-dashboard"></i> Home</a>
-            </li>
-            <li class="active">Dashboard</li>
-          </ol>
+          
         </section>
         <section class="content">
       <div class="row">
@@ -157,7 +159,7 @@ document.addEventListener("DOMContentLoaded", function() {
               </div>
               <!-- /.box-body -->
 
-              <div class="box-footer">
+              <div class="box-footer text-center">
                 <input type="submit" class="btn btn-primary" name="changePass" value="Add Activity"> 
               </div>
             </form>

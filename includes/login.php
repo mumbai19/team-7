@@ -101,10 +101,10 @@ if(isset($_POST['login'])) {
       href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic"
     />
   </head>
-  <body class="hold-transition skin-blue sidebar-mini">
+ 
+  <body class="hold-transition sidebar-mini">
     <div class="wrapper">
       
-
 
 
 
@@ -113,17 +113,19 @@ if(isset($_POST['login'])) {
 
       <!-- Content Wrapper. Contains page content -->
       <div class="content-wrapper">
+      <!-- <h2 class="text-center m-5">Touching Lives</h2> -->
 
 
         <!-- BODY GOES HERE -->
         <section class="content">
+        <h2 class="text-center">Touching Lives</h2>
       <div class="row">
         <!-- left column -->
         <div class="col-md-6">
           <!-- general form elements -->
           <div class="box box-primary">
             <div class="box-header with-border">
-              <h3 class="box-title">Team7 Login</h3>
+              <h3 class="box-title">Login</h3>
             </div>
             <!-- /.box-header -->
             <!-- form start -->
@@ -151,8 +153,8 @@ if(isset($_POST['login'])) {
               </div>
               <!-- /.box-body -->
 
-              <div class="box-footer">
-                  <input type="submit" value="Login" name="login">
+              <div class="box-footer text-center">
+                  <input type="submit" value="Login" name="login" class="btn btn-primary">
               </div>
             </form>
           </div>
@@ -170,11 +172,7 @@ if(isset($_POST['login'])) {
       <!-- /.content-wrapper -->
       
 
-        <!-- Footer start -->
-        <?php
-        include_once("../includes/footer.php");
-        ?>
-        <!-- Footer end -->
+        
     </div>
     <!-- ./wrapper -->
 

@@ -23,13 +23,37 @@
               </a>
             </li>
 
-            <li class="header">LABELS</li>
+            <li class="header">MENTOR</li>
             <li>
-              <a href="#"
+              <a href="attendance.php"
                 ><i class="fa fa-circle-o text-red"></i>
-                <span>Important</span></a
+                <span>Attendance</span></a
               >
             </li>
+              <li>
+                  <a href="addAssessment.php"
+                  ><i class="fa fa-circle-o text-red"></i>
+                      <span>Assesment</span></a
+                  >
+              </li>
+              <li>
+                  <a href="showActivity.php"
+                  ><i class="fa fa-circle-o text-red"></i>
+                      <span>Activity</span></a
+                  >
+              </li>
+              <li>
+                  <a href="#"
+                  ><i class="fa fa-circle-o text-red"></i>
+                      <span>Star Chart</span></a
+                  >
+              </li>
+              <li>
+                  <a href="#"
+                  ><i class="fa fa-circle-o text-red"></i>
+                      <span>Savings</span></a
+                  >
+              </li>
           </ul>
         </section>
         <!-- /.sidebar -->

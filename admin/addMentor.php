@@ -12,7 +12,7 @@ if(isset($_POST['addMentor'])){
         'user_role_id' => 2,
     );
         $id=$crude->create($conn,'users',$data);
-    echo $program_id;    
+
      $pid=explode(')',$program_id);
              $data=array(
                      'user_id'=>$id,

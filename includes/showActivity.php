@@ -1,38 +1,40 @@
 <?php
 include_once "../classes/Database.class.php";
+include_once "../classes/Activity.class.php";
 include_once "../classes/Session.class.php";
-include_once "../classes/Mentor.class.php";
 Session::startSession();
-$db=(new Database())->getConnection();
-$mentor=new Mentor($db);
-?>
+$conn=(new Database())->getConnection();
+$act=new Activity($conn);
+$results=$act->getActivitiesForProgramme($_SESSION['user_id']);
 
+
+?>
 <!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <title>Mentor | Dashboard</title>
+    <title>AdminLTE 2 | Dashboard</title>
     <!-- Tell the browser to be responsive to screen width -->
     <meta
-            content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"
-            name="viewport"
+        content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"
+        name="viewport"
     />
     <!-- Bootstrap 3.3.7 -->
     <link
-            rel="stylesheet"
-            href="../assets/bower_components/bootstrap/dist/css/bootstrap.min.css"
+        rel="stylesheet"
+        href="../assets/bower_components/bootstrap/dist/css/bootstrap.min.css"
     />
     <link rel="manifest" href="manifest.json">
     <!-- Font Awesome -->
     <link
-            rel="stylesheet"
-            href="../assets/bower_components/font-awesome/css/font-awesome.min.css"
+        rel="stylesheet"
+        href="../assets/bower_components/font-awesome/css/font-awesome.min.css"
     />
     <!-- Ionicons -->
     <link
-            rel="stylesheet"
-            href="../assets/bower_components/Ionicons/css/ionicons.min.css"
+        rel="stylesheet"
+        href="../assets/bower_components/Ionicons/css/ionicons.min.css"
     />
     <!-- Theme style -->
     <link rel="stylesheet" href="../assets/dist/css/AdminLTE.min.css" />
@@ -43,23 +45,23 @@ $mentor=new Mentor($db);
     <link rel="stylesheet" href="../assets/bower_components/morris.js/morris.css" />
     <!-- jvectormap -->
     <link
-            rel="stylesheet"
-            href="../assets/bower_components/jvectormap/jquery-jvectormap.css"
+        rel="stylesheet"
+        href="../assets/bower_components/jvectormap/jquery-jvectormap.css"
     />
     <!-- Date Picker -->
     <link
-            rel="stylesheet"
-            href="../assets/bower_components/bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css"
+        rel="stylesheet"
+        href="../assets/bower_components/bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css"
     />
     <!-- Daterange picker -->
     <link
-            rel="stylesheet"
-            href="../assets/bower_components/bootstrap-daterangepicker/daterangepicker.css"
+        rel="stylesheet"
+        href="../assets/bower_components/bootstrap-daterangepicker/daterangepicker.css"
     />
     <!-- bootstrap wysihtml5 - text editor -->
     <link
-            rel="stylesheet"
-            href="../assets/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css"
+        rel="stylesheet"
+        href="../assets/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css"
     />
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
@@ -71,8 +73,8 @@ $mentor=new Mentor($db);
 
     <!-- Google Font -->
     <link
-            rel="stylesheet"
-            href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic"
+        rel="stylesheet"
+        href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic"
     />
 </head>
 <body class="hold-transition skin-blue sidebar-mini">
@@ -81,7 +83,7 @@ $mentor=new Mentor($db);
 
     <!-- header goes here -->
     <?php
-    include_once ("./templates/header.php");
+    include_once ("../includes/templates/header.php");
     ?>
     <!-- header ends -->
 
@@ -89,8 +91,7 @@ $mentor=new Mentor($db);
     <!-- Left side column. contains the logo and sidebar -->
     <!-- side bar goes ehre -->
     <?php
-    $name=$_SESSION['user_name'];
-    include_once ("./templates/navbar.php");
+    include_once ("../includes/templates/navbar.php");
     ?>
     <!-- side bar ends -->
 
@@ -100,24 +101,67 @@ $mentor=new Mentor($db);
         <section class="content-header">
             <h1>
                 Dashboard
-                <small>Mentor panel</small>
+                <small>Control panel</small>
             </h1>
-
+            <ol class="breadcrumb">
+                <li>
+                    <a href="#"><i class="fa fa-dashboard"></i> Home</a>
+                </li>
+                <li class="active">Dashboard</li>
+            </ol>
         </section>
 
 
+
+
+
+
+        <section class="content">
+            <div class="row">
+                <div class="col-xs-12">
+                    <div class="box">
+                        <div class="box-header">
+                            <h3 class="box-title">Hover Data Table</h3>
+                        </div>
+                        <!-- /.box-header -->
+                        <div class="box-body">
+                            <a href="addActivity.php" class="btn btn-primary">+ Add Activity</a>
+                            <table id="example2" class="table table-bordered table-hover">
+                                <thead>
+                                <tr>
+                                    <th>Sr</th>
+                                    <th>Activity</th>
+                                    <th>Activity Conducted on</th>
+                                    <th></th>
+                                    <th></th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <?php
+                                $cnt=0;
+                                foreach($results as $result){
+                                    extract($result);
+                                $cnt++;
+                                ?>
+                                <tr>
+                                    <td><?php echo $cnt; ?></td>
+                                    <td><a href="editActivity.php?id=<?php echo $activity_id ?>"><?php echo $name ?></a>
+                                    </td>
+                                    <td><?php echo $created_on?></td>
+                                    <td><a href="editActivity.php?id=<?php echo $activity_id ?>">Edit</td>
+                                    <td><a href="deleteActivity.php?id=<?php echo $activity_id ?>">Delete</td>
+                                </tr>
+                                <?php
+                                }
+                                ?>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
         <!-- BODY GOES HERE -->
-        <body>
-        <?php
 
-        $data=$mentor->getAllProgramsForTeacher($_SESSION['user_id']);
-        extract($data[0]);
-        ?>
-
-        <div style="background-color: #3c8dbc; width: 100px;height: 100px;">
-            <a href="showProgrammeStudents.php?p=<?php echo $programme_id; ?>" style=" color: white"><?php echo $programme_name; ?></a>
-        </div>
-        </body>
         <!-- BODY ENDS HERE -->
 
 
@@ -127,7 +171,7 @@ $mentor=new Mentor($db);
 
     <!-- Footer start -->
     <?php
-    include_once("./templates/footer.php");
+    include_once("../includes/footer.php");
     ?>
     <!-- Footer end -->
 </div>
@@ -170,3 +214,23 @@ $mentor=new Mentor($db);
 <script src="../assets/dist/js/demo.js"></script>
 </body>
 </html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
