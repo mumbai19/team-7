@@ -16,6 +16,17 @@ class Theme{
         return $result;
     }
 
+
+    public function getTheme($conn,$res){
+        $id = $res;
+
+        $sql = "select theme_name from theme where theme_id=".$id;
+        $ps = $conn->prepare($sql);
+        $ps->execute();
+        $result = $ps->fetch();
+        return $result;
+    }
+
     public function getParametersForProgram($conn,$user_id){
         // $var = $_SESSION['user_id'];
         $obj = new Mentor($conn);
@@ -32,7 +43,7 @@ class Theme{
         $columnString = implode(",",array_keys($data));
         $valueString = ":".implode(", :",array_keys($data));
 
-        
+
         // $data = array("theme_id"=>$_POST['theme'],"mentor_id"=>$_POST['user'],"student_id"=>$_POST['stud'],"parameter_id"=>$_POST['par'],"programme_id"=>$program['prog_id']);        
 
         $sql = "INSERT INTO assessment ({$columnString}) VALUES ({$valueString})";

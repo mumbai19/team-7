@@ -1,18 +1,37 @@
 <?php
-// include_once "../classes/Database.class.php";
-// include_once "../classes/Activity.class.php";
-// include_once "../classes/Session.class.php";
-// Session::startSession();
-// $conn=(new Database())->getConnection();
-// $crud=new Crud($conn);
+include_once "../classes/Database.class.php";
+include_once "../classes/Activity.class.php";
+include_once "../classes/Session.class.php";
+include_once ("../classes/Theme.class.php");
+Session::startSession();
+$conn=(new Database())->getConnection();
+$conn1 = new Database();
+$cn = $conn1->getConnection();
+$crud=new Crud($conn);
 
-// $result=$crud->readAll($conn,"theme",1);
-// $themess=[];
-// foreach($result as $res)
-// {
-//   extract($res);
-//   array_push($themess,$theme_name);
-// }
+$theme = new Theme();
+
+$result=$crud->readAll($conn,"theme",1);
+$themess=[];
+foreach($result as $res)
+{
+  extract($res);
+  array_push($themess,$theme_name);
+}
+
+$res="";
+$id="";
+if(isset($_GET['id'])){
+    $activity_id = $_GET['id'];
+    $obj = new Activity($conn);
+    $res = $obj->getDetail($activity_id);
+    $id =  $res['theme_id'];
+
+    $name = $theme->getTheme($cn,$id);
+    // print_r($name);
+    // echo $res['name'];
+    // print_r($res);
+}
 ?>
 
 
@@ -87,30 +106,7 @@
       href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic"
     />
 
-    <script type='text/javascript'>
-
-   
-document.addEventListener("DOMContentLoaded", function() {
-  loadOptions();
-});
-
-      function loadOptions()
-      {
-      
-        //Retrieve theme arr from database
-      //  arr=[11,22,33,44,55];
-        
-      var data1 =<?php echo json_encode($themess);?>;
-      for(var i=0;i<data1.length;i++)
-      {
-          var option = document.createElement("option");
-          option.text = data1[i];
-          option.value = data1[i];
-          var select = document.getElementById("theme");
-            select.appendChild(option);
-        }
-      }
-</script>
+    
   </head>
   <body class="hold-transition skin-blue sidebar-mini">
     <div class="wrapper">
@@ -150,34 +146,45 @@ document.addEventListener("DOMContentLoaded", function() {
 
         <div class="box box-primary">
             <div class="box-header with-border">
-              <h3 class="box-title">Add Activity</h3>
+              <h3 class="box-title">Edit Activity</h3>
             </div>
             <!-- /.box-header -->
             <!-- form start -->
-            <form role="form" action="" method="post" enctype="multipart/form-data">
+            <form role="form" action="editActivityPage.php" method="post" enctype="multipart/form-data">
               <div class="box-body">
+
+            <input type="hidden" name=activity value=<?php echo $_GET['id'] ?> >
                
                 <div class="form-group">
                   <label>Theme</label>
-                  <select id="theme" class="form-control select2" style="width: 100%;">
+                  <select id="theme" name="theme" class="form-control select2" style="width: 100%;">
+                  <?php
+                  echo '<option value='.$id.'>'.$res['name'].'</option>';
+                  ?>
+
+                  <?php
+                //   foreach($result as $res){
+                //       echo "<option value=".$res['activity_id'].'>'.$res['activity_name'].'</option>';
+                //   }
+                  ?>
                 
                 </select>
                    </div>
                 <div class="form-group">
                   <label>Activity Name</label>
-                  <input type="text" class="form-control" name="activity_name">
+                  <input type="text" class="form-control" name="activity_name" value="<?php echo $name['theme_name']?>">
                 </div>
 
                 <div class="form-group">
                   <label>Description</label>
-                  <input type="text" class="form-control" name="description">
+                  <input type="text" class="form-control" name="description" value="<?php echo $res['description'] ?>">
                 </div>
               
               </div>
               <!-- /.box-body -->
 
               <div class="box-footer">
-                <input type="submit" class="btn btn-primary" name="changePass" value="Add Activity"> 
+                <input type="submit" class="btn btn-primary" name="changePass" value="Edit Activity"> 
               </div>
             </form>
           </div>

@@ -25,7 +25,7 @@ class Attendance{
         //add created_by into the file
 
         
-        echo "hello";
+        // echo "hello";
         $isPresent=0;
         if($mark=="present"){
             $isPresent=1;
@@ -40,7 +40,7 @@ class Attendance{
 
         // $sql = "INSERT INTO attendance ({$columnString}) VALUES ({$valueString})";
         $sql = "insert into attendance (student_id,isPresent) values($id,$isPresent)";
-        echo $sql;
+        // echo $sql;
         $ps = $conn->prepare($sql);
         $result = $ps->execute($data);
 
