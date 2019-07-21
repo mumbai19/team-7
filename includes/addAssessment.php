@@ -9,7 +9,8 @@ include_once("../classes/Theme.class.php");
 $ob = new Database();
 $conn = $ob->getConnection();
 $obj = new Theme();
-$results = $obj->getAllThemes($conn);
+$user_id = $_SESSION['user_id'];
+$results = $obj->getAllThemes($conn,$user_id);
 $obj3 = new Attendance();
 $students = $obj3->getAllStudents($conn,$_SESSION['user_id']);
 // print_r($results);
@@ -27,7 +28,9 @@ foreach($results as $res){
     array_push($names,$theme_name);
 }
 // print_r($names);
-$parameters = $obj->getParametersForProgram($conn);
+
+$parameters = $obj->getParametersForProgram($conn,$_SESSION['user_id']);
+
 foreach($parameters as $per){
     extract($per);
     array_push($idsp,$parameter_id);

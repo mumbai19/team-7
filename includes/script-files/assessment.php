@@ -23,12 +23,13 @@ if(isset($_POST['parameter'])){
     
     $mentor = $mentor_id['mentor_id'];
     // echo $mentor;
-    $program = $obj->getProgramForMentor($conn,$mentor);
+    $program = $obj->getId($conn,$mentor);
     // print_r($program);
+    // echo $program['prog_id'];
 
-    $data = array("theme_id"=>$_POST['theme'],"mentor_id"=>$_POST['user'],"student_id"=>$_POST['stud'],"parameter_id"=>$_POST['par'],"programme_id"=>$program['prog_id']);
+    $data = array("theme_id"=>$_POST['theme'],"mentor_id"=>$mentor_id['mentor_id'],"student_id"=>$_POST['stud'],"parameter_id"=>$_POST['par'],"programme_id"=>$program['prog_id']);
 
-
+    // echo $program['prog_id'];
     $obj = new Theme();
     $obj->insertAssessment($conn,$data);
 }
