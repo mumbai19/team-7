@@ -107,15 +107,15 @@ $mentor=new Mentor($db);
 
 
         <!-- BODY GOES HERE -->
-        <body>
+        <body >
         <?php
 
         $data=$mentor->getAllProgramsForTeacher($_SESSION['user_id']);
         extract($data[0]);
         ?>
 
-        <div style="background-color: #3c8dbc; width: 100px;height: 100px;">
-            <a href="showProgrammeStudents.php?p=<?php echo $programme_id; ?>" style=" color: white"><?php echo $programme_name; ?></a>
+        <div style="background-color: #3c8dbc; width: 100px;height: 40px;margin-left: 20px;border-radius: 10px;">
+            <a href="showProgrammeStudents.php?p=<?php echo $programme_id;  ?>" style=" color: white;padding-left: 13px;margin-top: 35px;"><?php echo $programme_name; ?></a>
         </div>
         </body>
         <!-- BODY ENDS HERE -->

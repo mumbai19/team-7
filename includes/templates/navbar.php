@@ -4,10 +4,7 @@
           <!-- Sidebar user panel -->
           <div class="user-panel">
             <div class="pull-left image">
-              <img
-                src="dist/img/user2-160x160.jpg"
 
-              />
             </div>
             <div class="pull-left info">
              <!-- <p><?php echo $name; ?></p>-->
@@ -15,10 +12,10 @@
           </div>
 
           <!-- sidebar menu: : style can be found in sidebar.less -->
-          <ul class="sidebar-menu" data-widget="tree">
-            <li class="header">MAIN NAVIGATION</li>
+          <ul class="sidebar-menu" >
+
             <li class="active treeview">
-              <a href="#">
+              <a href="mentorDashboard.php">
                 <i class="fa fa-dashboard"></i> <span>Dashboard</span>
               </a>
             </li>
@@ -43,13 +40,13 @@
                   >
               </li>
               <li>
-                  <a href="#"
+                  <a href="../charts/RunChart.php"
                   ><i class="fa fa-circle-o text-red"></i>
-                      <span>Star Chart</span></a
+                      <span>Charts</span></a
                   >
               </li>
               <li>
-                  <a href="#"
+                  <a href="savingsReport.php"
                   ><i class="fa fa-circle-o text-red"></i>
                       <span>Savings</span></a
                   >

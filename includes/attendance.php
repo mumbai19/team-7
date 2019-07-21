@@ -22,7 +22,7 @@ $results = $obj->getAllStudents($conn,$_SESSION['user_id']);
 <head>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <title>AdminLTE 2 | Dashboard</title>
+    <title>Attendance</title>
     <!-- Tell the browser to be responsive to screen width -->
     <meta
             content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"
@@ -114,15 +114,10 @@ $results = $obj->getAllStudents($conn,$_SESSION['user_id']);
         <!-- Content Header (Page header) -->
         <section class="content-header">
             <h1>
-                Dashboard
-                <small>Control panel</small>
+                Attendance
+                <small>Mentor panel</small>
             </h1>
-            <ol class="breadcrumb">
-                <li>
-                    <a href="#"><i class="fa fa-dashboard"></i> Home</a>
-                </li>
-                <li class="active">Dashboard</li>
-            </ol>
+
         </section>
 
 
@@ -130,27 +125,30 @@ $results = $obj->getAllStudents($conn,$_SESSION['user_id']);
         <form action="script-files/insertAttendance.php" method="post">
 
 
+            <table class="table table-striped">
+                <tr>
+                    <td>Sr</td>
+                    <td>Student_name</td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <?php
+                $cnt=0;
+                foreach($results as $result){
+                       $cnt++;
+                    ?>
 
-            <?php
-            foreach($results as $result){
-                echo $result['student_id']."";?>
+                    <tr>
+                        <td><?php echo $cnt;?></td>
+                    <td><?php echo $result['student_first_name']." ".$result['student_last_name'] ?></td>
+                    <td><input type="radio" name="<?php echo $result['student_id'] ?>" value="present"> Present</td>
+                    <td><input type="radio" name="<?php echo $result['student_id'] ?>" value="absent"> Absent <br></td>
 
-
-                <label><?php echo $result['student_first_name']." ".$result['student_last_name'] ?></label>
-
-                <label class="radio-inline">
-                    <input type="radio" name="<?php echo $result['student_id'] ?>" value="present"> Present
-                </label>
-                <label class="radio-inline">
-                    <input type="radio" name="<?php echo $result['student_id'] ?>" value="absent"> Absent <br>
-                </label>
-
-
-                <br>
+                </tr>
                 <?php
             }
             ?>
-
+            </table>
             <!-- <input type="radio" name="gender" value="male"> Male<br>
             <input type="radio" name="gender" value="female"> Female<br> -->
             <input type="hidden" name="user" value=<?php echo $_SESSION['user_id'] ?>>
