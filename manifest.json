@@ -3,8 +3,8 @@
   "short_name": "TL",
   "start_url": "/team-7/includes/attendance.php",
   "display": "standalone",
-  "background_color": "#FFE9D2",
-  "theme_color": "#FFE1C4",
+  "background_color": "#030bfc",
+  "theme_color": "#030bfc",
   "orientation": "portrait-primary",
   "icons": [
     {
