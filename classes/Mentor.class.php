@@ -29,12 +29,19 @@ class Mentor
     }
 
     public function getProgramForMentor($conn,$mentor_id){
-        $sql = "SELECT prog_id FROM mentor where mentor_id=$mentor_id";
+        $sql = "SELECT prog_id FROM mentor where user_id=$mentor_id";
         $ps = $this->conn->prepare($sql);
         $ps->execute();
         $result = $ps->fetch();
         return $result;
 
+    }
+    public function getId($conn,$mentor_id){
+        $sql = "select prog_id from mentor where mentor_id=$mentor_id";
+        $ps = $this->conn->prepare($sql);
+        $ps->execute();
+        $result = $ps->fetch();
+        return $result;
     }
     public function getNamesOfAllStudentsForProgramme($programme_id){
         $sql ="SELECT student.student_id,student.student_first_name,student.student_last_name,student.created_on from student inner join student_programme on student.student_id=student_programme.student_id where student_programme.programme_id=$programme_id";
