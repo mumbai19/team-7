@@ -94,9 +94,7 @@ if(isset($_POST['changePass']) && isset($_GET['XSRS'])){
       
 
         <!-- header goes here -->
-        <?php
-        include_once ("../includes/templates/header.php");
-        ?>
+
         <!-- header ends -->
 
 
@@ -108,27 +106,14 @@ if(isset($_POST['changePass']) && isset($_GET['XSRS'])){
       <!-- Content Wrapper. Contains page content -->
       <div class="content-wrapper">
         <!-- Content Header (Page header) -->
-        <section class="content-header">
-          <h1>
-            Dashboard
-            <small>Control panel</small>
-          </h1>
-          <ol class="breadcrumb">
-            <li>
-              <a href="#"><i class="fa fa-dashboard"></i> Home</a>
-            </li>
-            <li class="active">Dashboard</li>
-          </ol>
-        </section>
         <section class="content">
       <div class="row">
+      <h2 class="text-center">Change Password</h2>
+
         <!-- left column -->
         <div class="col-md-6">
 
                     <div class="box box-primary">
-                        <div class="box-header with-border">
-                            <h3 class="box-title">Quick Example</h3>
-                        </div>
                         <!-- /.box-header -->
                         <!-- form start -->
                         <form role="form" action="" method="post" enctype="multipart/form-data">
@@ -146,8 +131,8 @@ if(isset($_POST['changePass']) && isset($_GET['XSRS'])){
                             </div>
                             <!-- /.box-body -->
 
-                            <div class="box-footer">
-                                <input type="submit" class="btn btn-primary" name="changePass" value="Add Mentor">
+                            <div class="box-footer text-center">
+                                <input type="submit" class="btn btn-primary center" name="changePass" value="Add Mentor">
                             </div>
                         </form>
                     </div>
@@ -167,9 +152,6 @@ if(isset($_POST['changePass']) && isset($_GET['XSRS'])){
       
 
 <!-- Footer start -->
-<?php
-include_once("./templates/footer.php");
-?>
 <!-- Footer end -->
 </div>
 <!-- ./wrapper -->

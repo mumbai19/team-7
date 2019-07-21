@@ -25,6 +25,15 @@ class Crud
             return false;
         }
     }
+
+
+    public static function getSum($conn,$query){
+        //$sql="SELECT sum($attr) AS sum FROM $table WHERE $cond";
+        $statement = $conn->prepare($query);
+        $statement->execute();
+        $result = $statement->fetch(PDO::FETCH_ASSOC);
+        return $result;
+    }
     
     public static function update($conn,$table,$data,$condition){
         $i=0;
@@ -35,7 +44,7 @@ class Crud
             $i++;
         }
         $sql = "UPDATE $table SET $columnValueSet WHERE $condition";
-        echo $sql;
+     
         $ps =  $conn->prepare($sql);
 
         $result = $ps->execute();

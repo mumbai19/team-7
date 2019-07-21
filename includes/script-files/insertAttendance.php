@@ -24,7 +24,7 @@ if(isset($_POST['attendance'])){
         $mentor  = $obj2->getMentor($_POST['user']);
 
         $obj->insertAttendance($conn,$mark,$result['student_id'],$program['prog_id'],$mentor['mentor_id']);
-        
+        header ("Location: ../dashboard.php");
     }
 
     //     $var = $_POST['1'];

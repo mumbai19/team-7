@@ -1,20 +1,19 @@
 <?php
 include_once "../classes/Database.class.php";
-include_once "../classes/Activity.class.php";
+include_once "../classes/Crud.class.php";
 include_once "../classes/Session.class.php";
 Session::startSession();
-$conn=(new Database())->getConnection();
-$act=new Activity($conn);
-$results=$act->getActivitiesForProgramme($_SESSION['user_id']);
-
-
+$db=(new Database())->getConnection();
+$crud=new Crud($db);
 ?>
+
+
 <!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <title>Show Activity</title>
+    <title>Savings</title>
     <!-- Tell the browser to be responsive to screen width -->
     <meta
         content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"
@@ -76,6 +75,21 @@ $results=$act->getActivitiesForProgramme($_SESSION['user_id']);
         rel="stylesheet"
         href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic"
     />
+    <style type="text/css">
+        td,th{
+            border: 1px solid black;
+            padding: 10px;
+        }
+        table{
+            padding: 10px;
+            border:1px solid black;
+            margin : 20px 20%;
+            width:30% ;
+
+        }
+    </style>
+
+
 </head>
 <body class="hold-transition skin-blue sidebar-mini">
 <div class="wrapper">
@@ -90,9 +104,7 @@ $results=$act->getActivitiesForProgramme($_SESSION['user_id']);
 
     <!-- Left side column. contains the logo and sidebar -->
     <!-- side bar goes ehre -->
-    <?php
-    include_once ("../includes/templates/navbar.php");
-    ?>
+
     <!-- side bar ends -->
 
     <!-- Content Wrapper. Contains page content -->
@@ -100,7 +112,7 @@ $results=$act->getActivitiesForProgramme($_SESSION['user_id']);
         <!-- Content Header (Page header) -->
         <section class="content-header">
             <h1>
-                Activities
+                Savings
                 <small>Mentor panel</small>
             </h1>
             <ol class="breadcrumb">
@@ -110,70 +122,111 @@ $results=$act->getActivitiesForProgramme($_SESSION['user_id']);
                 <li class="active">Dashboard</li>
             </ol>
         </section>
-
-
-
-
-
-
         <section class="content">
             <div class="row">
-                <div class="col-xs-12">
-                    <div class="box">
-                        <div class="box-header">
-                            <h3 class="box-title">Hover Data Table</h3>
+                <!-- left column -->
+                <div class="col-md-6">
+
+                    <div class="box box-primary">
+                        <div class="box-header with-border">
+                            <h3 class="box-title"></h3>
                         </div>
                         <!-- /.box-header -->
-                        <div class="box-body">
-                            <a href="addActivity.php" class="btn btn-primary">+ Add Activity</a>
-                            <table id="example2" class="table table-bordered table-hover">
-                                <thead>
-                                <tr>
-                                    <th>Sr</th>
-                                    <th>Activity</th>
-                                    <th>Activity Conducted on</th>
-                                    <th></th>
-                                    <th></th>
-                                </tr>
-                                </thead>
-                                <tbody>
+                        <!-- form start -->
+                        <form role="form" action="" method="post" enctype="multipart/form-data">
+                            <div class="box-body">
+
                                 <?php
-                                $cnt=0;
-                                foreach($results as $result){
-                                    extract($result);
-                                $cnt++;
-                                ?>
-                                <tr>
-                                    <td><?php echo $cnt; ?></td>
-                                    <td><a href="editActivity.php?id=<?php echo $activity_id ?>"><?php echo $name ?></a>
-                                    </td>
-                                    <td><?php echo $created_on?></td>
-                                    <td><a href="editActivity.php?id=<?php echo $activity_id ?>">Edit</td>
-                                    <td><a href="deleteActivity.php?id=<?php echo $activity_id ?>">Delete</td>
-                                </tr>
-                                <?php
+                                if(isset($_POST['reportGen'])){
+                                    echo "
+                                    <table> <tr> <th> Student </th> <th> Savings </th> <th> Clear Due </th> </tr>
+                                    ";
+                                    //extract($_POST);
+                                    $condition=1;
+                                    $result = $crud->readall($db,'student',$condition);
+                                    foreach($result as $res){
+                                        $sid=$res['student_id'];
+                                        echo ' <form role="form" action="" method="post" enctype="multipart/form-data">
+                                        <tr> <td>'.$res['student_first_name'].' '.$res['student_last_name'].'</td> <td>';
+                                        $sql="SELECT sum(amount) AS sum FROM savings WHERE student_id='$sid' AND created_on LIKE '_____07%'";
+                                        //$condition="SELECT sum(amount) AS sum FROM savings WHERE student_id=res['student_id'];";
+                                        $result = $crud->getSum($db,$sql);
+                                        //header("Location: login.php");
+                                        echo $result['sum'].'</td>';
+
+                                        echo '<td>  <input type="submit" class="btn btn-primary" name="clearDue" value="Clear Due"> 
+                                            <input type="number" value="'.$sid.'" name="studid" hidden>
+                                            </td> </tr>';
+
+
+
+                                        $data=array(
+                                            'month_amount' => $result['sum'],
+                                            'is_due' => 1,
+                                            'student_id' => $sid,
+                                            'created_by' =>1,
+                                            'is_deleted' => 0,
+                                            // 'is_first_login'=>0,
+
+                                        );
+                                        $crud->create($db,'savings_isdue',$data);
+
+
+                                    }
+                                    echo "</table>";
+                                }
+
+                                if(isset($_POST['clearDue'])){
+
+
+                                    extract($_POST);
+                                    $sid=$_POST['studid'];
+                                    $condition="student_id='$sid' AND created_on LIKE '_____07%' ";
+                                    $data=array(
+                                        'month_amount' => 0,
+
+                                    );
+                                    $crud->update($db,'savings_isdue',$data,$condition);
+
+                                    $condition="student_id='$sid' AND created_on LIKE '_____07%' ";
+                                    $data=array(
+                                        'is_due' => 0,
+
+                                    );
+                                    $crud->update($db,'savings_isdue',$data,$condition);
+
                                 }
                                 ?>
-                            </table>
-                        </div>
+
+                            </div>
+                            <!-- /.box-body -->
+
+                            <div class="box-footer">
+                                <input type="submit" class="btn btn-primary" name="reportGen" value="View Report">
+                            </div>
+                        </form>
                     </div>
+
                 </div>
             </div>
+
         </section>
-        <!-- BODY GOES HERE -->
-
-        <!-- BODY ENDS HERE -->
-
 
     </div>
-    <!-- /.content-wrapper -->
+    <!-- /.form-box -->
+</div>
+<!-- BODY ENDS HERE -->
 
 
-    <!-- Footer start -->
-    <?php
-    include_once("templates/footer.php");
-    ?>
-    <!-- Footer end -->
+</div>
+<!-- /.content-wrapper -->
+
+
+<!-- Footer start -->
+<?php
+include_once("../includes/templates/footer.php");
+?>
+<!-- Footer end -->
 </div>
 <!-- ./wrapper -->
 
@@ -214,23 +267,3 @@ $results=$act->getActivitiesForProgramme($_SESSION['user_id']);
 <script src="../assets/dist/js/demo.js"></script>
 </body>
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
